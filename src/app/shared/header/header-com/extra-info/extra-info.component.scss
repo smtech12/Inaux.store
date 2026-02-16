@@ -1,0 +1,30 @@
+.extra-title {
+  .user-name {
+    font-size: 14px;
+    color: #666;
+    font-weight: 400;
+    margin-top: 5px;
+    margin-bottom: 0;
+    padding: 0;
+  }
+}
+
+// Styling for the dropdown menu links
+.my-account {
+  ul {
+    li {
+      a {
+        color: #000 !important; // Make links black
+        transition: color 0.3s ease;
+        
+        &:hover {
+          color: #ffc959 !important; // Theme orange from styles.scss
+        }
+      }
+    }
+  }
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}

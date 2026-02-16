@@ -1,0 +1,121 @@
+<section class="footer__area footer-bg">
+  <div class="footer__top pt-100 pb-60">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-3 col-lg-3 col-md-3 col-12">
+          <div class="footer__widget mb-30">
+            <div class="footer__widget-title mb-25">
+              <a routerLink="/home/home-style-1">
+                <img [src]="logoUrl" alt="logo">
+              </a>
+            </div>
+            <div class="footer__widget-content">
+              <!-- <p *ngIf="storeName">{{storeName}}</p> -->
+              <!-- <p *ngIf="!storeName"></p> -->
+              <p>Haala is a premium e-commerce brand offering refined headwear and exquisite fragrances.
+Crafted for those who appreciate timeless elegance and quality.</p>
+              
+              <span class="footer-shipping">
+                <img src="./assets/img/iconseye-copy-1-1.webp" class="img-fluid" alt="Shipping" />
+
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-3 col-12">
+          <div class="footer__widget mb-30 pl-60">
+            <div class="footer__widget-title">
+              <h5>information</h5>
+            </div>
+            <div class="footer__widget-content">
+              <div class="footer__links">
+                <ul>
+                  <li><a routerLink="/about">About Us</a></li>
+                  <li><a routerLink="/contact">Help & Contact Us</a></li>
+                  <li><a href="#">Online Stores</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-3 col-12">
+          <div class="footer__widget mb-30">
+            <div class="footer__widget-title mb-25">
+              <h5>Customer Service</h5>
+            </div>
+            <div class="footer__widget-content">
+              <div class="footer__links">
+                <ul>
+                  <li><a routerLink="/shipping-policy">Shipping Policy</a></li>
+                  <li><a routerLink="/return-refund">Returns & Refunds</a></li>
+                  <li><a routerLink="/terms">Terms & Conditions</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-3 col-12">
+          <div class="footer__widget mb-30">
+            <div class="footer__widget-title mb-25">
+              <h5>Get In touch</h5>
+            </div>
+            <div class="footer__widget-content">
+             <span class="help-link">
+                <i class="cal-icon"><img class="img-fluid animated infinite tada" src="./assets/img/headphones-2.webp" /></i>
+                <span class="help-txt">
+                  <p>Need Help?</p>
+                  <a href="tel:+923212482592">0321-248-2592</a>
+                </span>
+             </span>
+              <div class="footer__contact mt-4">
+                <ul>
+                  <li>
+                    <div class="icon">
+                      <i class="fal fa-map-marker-alt"></i>
+                    </div>
+                    <div class="text">
+                      <span>Add: Salman Tower Malir 15</span>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="icon">
+                      <i class="fal fa-envelope-open-text"></i>
+                    </div>
+                    <div class="text">
+                      <span>Email: saqib_azim&#64;yahoo.com</span>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="icon">
+                      <i class="fal fa-phone-alt"></i>
+                    </div>
+                    <div class="text">
+                      <span>Phone Number: 03212482592</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-6 col-lg-7">
+          <div class="footer__copyright">
+            <p>Copyright © <a href="https://dcodics.io/" target="_blank" rel="noopener noreferrer">DCodics</a> all
+              rights reserved. / Visitor Count: {{visitorCount}}</p>
+          </div>
+        </div>
+        <div class="col-xl-6 col-lg-5">
+          <div class="footer__social f-right">
+            <app-social-media-icons></app-social-media-icons>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

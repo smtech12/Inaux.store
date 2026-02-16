@@ -1,0 +1,54 @@
+// Import theme variables
+@import "../../../../assets/scss/variables";
+
+// Countdown Timer Styles
+.product__countdown-timer {
+  .countdown-display {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, $theme-color 0%, darken($theme-color, 10%) 100%);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba($theme-color, 0.2);
+    animation: pulse 2s infinite-in-out;
+
+    i {
+      color: white;
+      font-size: 16px;
+      animation: tick 1s infinite-in-out;
+    }
+
+    .countdown-text {
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin: 0;
+    }
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 2px 8px rgba($theme-color, 0.2);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba($theme-color, 0.3);
+  }
+}
+
+@keyframes tick {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-5deg);
+  }
+  75% {
+    transform: rotate(5deg);
+  }
+}

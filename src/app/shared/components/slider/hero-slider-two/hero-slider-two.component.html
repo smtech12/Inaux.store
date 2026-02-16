@@ -1,0 +1,42 @@
+<!--hero slider area start -->
+<section class="slider__area slider__area-2 p-relative">
+  <div class="slider-active swiper-container" #heroSliderContainer>
+    <div class="swiper-wrapper">
+      <div *ngFor="let item of hero_slider_data"
+        class="single-slider single-slider-2 slider__height-4 d-flex align-items-center swiper-slide">
+        <div class="container-fluid h-100">
+          <div class="row h-100">
+            <!-- <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 p-0">
+              <div class="slider__content slider__content-4 slider__height-4"
+                [class.slider__content-black]="item.isDark">
+                <h2 [innerHTML]="item.title"></h2>
+                <p>{{item.subtitle}}</p> -->
+            <!-- External URL button -->
+            <!-- <ng-container *ngIf="isExternalUrl(item.redirectUrl)">
+                  <a [attr.href]="item.redirectUrl" [ngClass]="item.isDark ? 'os-btn-white' : 'os-btn-2'" class="os-btn"
+                    target="_blank" rel="noopener noreferrer">Discover now</a>
+                </ng-container> -->
+            <!-- Internal route button -->
+            <!-- <ng-container *ngIf="!isExternalUrl(item.redirectUrl)">
+                  <a *ngIf="hasValidRedirectUrl(item)" [routerLink]="getItemLink(item)"
+                    [ngClass]="item.isDark ? 'os-btn-white' : 'os-btn-2'" class="os-btn">Discover now</a>
+                  <a *ngIf="!hasValidRedirectUrl(item)" href="#" [ngClass]="item.isDark ? 'os-btn-white' : 'os-btn-2'"
+                    class="os-btn">Discover now</a>
+                </ng-container> -->
+            <!-- </div>
+            </div> -->
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 p-0">
+              <!-- <div class="hero-img h-100" [style.background-image]="'url(\'' + getImageUrl(item.bgImg) + '\')'">
+              </div> -->
+              <div class="hero-img h-100">
+                <img [src]="getImageUrl(item.bgImg)" class="img-fluid" [alt]="item.title || 'Hero Banner'" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tp-slider-dot-2"></div>
+  </div>
+</section>
+<!--hero slider area end -->

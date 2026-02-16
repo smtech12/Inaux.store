@@ -1,0 +1,74 @@
+<!-- header start -->
+<app-header-one [transparent]="true" [white_bg]="true"></app-header-one>
+<!-- header end -->
+
+<main>
+
+  <!-- breadcrumb start -->
+  <app-dynamic-page-title title="Wishlist" subtitle="Wishlist" sectionName="Product Banner"></app-dynamic-page-title>
+  <!-- breadcrumb end -->
+
+  <!-- wishlist area start-->
+  <section class="cart-area pt-100 pb-100">
+    <div class="container">
+      <div *ngIf="wishlistService.getWishlistProducts().length === 0" class="text-center pt-50">
+        <h3>No Wishlist Items Found</h3>
+        <a routerLink="/shop" class="os-btn os-btn-black mt-20">Continue Shopping</a>
+      </div>
+      <div *ngIf="wishlistService.getWishlistProducts().length > 0" class="row">
+        <div class="col-12">
+          <div class="table-content table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th class="product-thumbnail">Images</th>
+                  <th class="cart-product-name">Product</th>
+                  <th class="product-price">Unit Price</th>
+                  <th class="product-quantity">Quantity</th>
+                  <th class="product-action">Action</th>
+                  <th class="product-remove">Remove</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of wishlistService.getWishlistProducts()">
+                  <td class="product-thumbnail">
+                    <a [routerLink]="['/shop/product-details', item.id]">
+                      <img [src]="item.img" alt="product-img">
+                    </a>
+                  </td>
+                  <td class="product-name">
+                    <a [routerLink]="['/shop/product-details', item.id]">{{item.title}}</a>
+                  </td>
+                  <td class="product-price">
+                    <span class="amount">Rs {{item.price.toFixed(2)}}</span>
+                  </td>
+                  <td class="product-quantity">
+                    <button (click)="addToCart(item)" class="os-btn os-btn-black"
+                      [attr.data-bs-toggle]="item.isVariable ? 'modal' : null"
+                      [attr.data-bs-target]="item.isVariable ? '#' + utilsService.modalId : null">
+                      Add TO Cart
+                    </button>
+                    <button (click)="directCheckout(item)" class="os-btn os-btn-black ml-10">
+                      Checkout
+                    </button>
+                  </td>
+                  <td class="product-remove">
+                    <a (click)="wishlistService.removeWishlist(item)" class="cursor-pointer">
+                      <i class="fa fa-times"></i>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- wishlist area End-->
+
+</main>
+
+<!-- footer start -->
+<app-footer-one></app-footer-one>
+<!-- footer end -->

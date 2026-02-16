@@ -1,0 +1,37 @@
+.product-name {
+  text-align: center;
+  vertical-align: middle;
+  
+  a {
+    display: block;
+    margin-bottom: 5px;
+  }
+}
+
+.cart-page-attributes {
+  font-size: 13px;
+  line-height: 1.6;
+  margin-top: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  
+  .cart-attribute-item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    
+    .attribute-name {
+      font-weight: 500;
+      color: #666;
+      margin-right: 3px;
+    }
+    
+    .attribute-value {
+      color: #333;
+      font-weight: 400;
+    }
+  }
+}
+

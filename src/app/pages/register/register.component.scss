@@ -1,0 +1,55 @@
+.password-input-wrapper {
+  position: relative;
+  width: 100%;
+
+  .password-input {
+    width: 100%;
+    padding-right: 40px; // Make room for the eye icon
+  }
+
+  .password-toggle {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #848b8a;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+
+    &:hover {
+      color: #bc8246;
+    }
+
+    i {
+      font-size: 16px;
+    }
+  }
+}
+
+.address-textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ebebeb;
+  border-radius: 4px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  line-height: 24px;
+  color: #201f1f;
+  resize: vertical;
+  min-height: 80px;
+
+  &:focus {
+    outline: none;
+    border-color: #bc8246;
+  }
+
+  &::placeholder {
+    color: #9d9d9d;
+  }
+}
+

@@ -1,0 +1,71 @@
+<!-- header start -->
+<app-header-one [transparent]="true" [white_bg]="true"></app-header-one>
+<!-- header end -->
+
+<main>
+
+  <!-- breadcrumb start -->
+  <app-breadcrumb-one title="Login" subtitle="Login"></app-breadcrumb-one>
+  <!-- breadcrumb end -->
+
+  <!-- login Area start -->
+  <section class="login-area pt-100 pb-100">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+          <div class="basic-login">
+            <h3 class="text-center mb-60">Login From Here</h3>
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+              <div class="mb-20">
+                <label for="email">Email Address <span>*</span></label>
+                <input id="email" type="email" placeholder="Email address..." formControlName="email" />
+                <span
+                  *ngIf="(email?.hasError('required') && email?.touched) || (email?.hasError('email') && email?.dirty) || (formSubmitted && !email?.value)"
+                  class="text-danger">
+                  Email is required and must be a valid email address
+                </span>
+              </div>
+
+              <div class="mb-20">
+                <label for="pass">Password <span>*</span></label>
+                <div class="password-input-wrapper">
+                  <input id="pass" [type]="isShowPass ? 'text' : 'password'" placeholder="Enter password..."
+                    formControlName="password" class="password-input" />
+                  <span class="password-toggle" (click)="handleShowPass()">
+                    <i [class]="isShowPass ? 'fal fa-eye-slash' : 'fal fa-eye'"></i>
+                  </span>
+                </div>
+                <span
+                  *ngIf="(password?.hasError('required') && password?.touched) || (password?.errors?.['minlength'] && password?.dirty) || (formSubmitted && !password?.value)"
+                  class="text-danger">
+                  Password is required and must be at least 6 characters
+                </span>
+              </div>
+
+              <div class="login-action mb-20 fix">
+                <span class="log-rem f-left">
+                  <input id="remember" type="checkbox" />
+                  <label for="remember">Remember me!</label>
+                </span>
+                <span class="forgot-login f-right">
+                  <a href="#">Lost your password?</a>
+                </span>
+              </div>
+              <button type="submit" class="os-btn w-100" [disabled]="isLoading">
+                <span *ngIf="!isLoading">Login Now</span>
+                <span *ngIf="isLoading">Logging in...</span>
+              </button>
+              <div class="or-divide"><span>or</span></div>
+              <a routerLink="/register" class="os-btn os-btn-black w-100">Register Now</a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- login Area End-->
+</main>
+
+<!-- footer start -->
+<app-footer-one></app-footer-one>
+<!-- footer end -->

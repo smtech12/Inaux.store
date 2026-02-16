@@ -1,0 +1,7 @@
+<ul class="social-media-icons">
+  <li *ngFor="let item of socialMediaItems">
+    <a [href]="item.redirectUrl" target="_blank" [title]="item.title">
+      <i [class]="getIconClass(item.title)"></i>
+    </a>
+  </li>
+</ul>

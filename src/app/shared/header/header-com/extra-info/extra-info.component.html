@@ -1,0 +1,18 @@
+<ul class="extra-info">
+  <li>
+    <div class="my-account">
+      <div class="extra-title">
+        <h5>My Account</h5>
+        <p class="user-name">{{userName}}</p>
+      </div>
+      <ul>
+        <li><a routerLink="/wishlist">Wishlist</a></li>
+        <li><a routerLink="/order-track">Track Order</a></li>
+        <li *ngIf="!isLoggedIn()"><a routerLink="/register">Create Account</a></li>
+        <li *ngIf="!isLoggedIn()"><a routerLink="/login">Login</a></li>
+        <li *ngIf="isLoggedIn()"><a routerLink="/account">Account</a></li>
+        <li *ngIf="isLoggedIn()"><a (click)="handleLogout()" class="cursor-pointer">Logout</a></li>
+      </ul>
+    </div>
+  </li>
+</ul>

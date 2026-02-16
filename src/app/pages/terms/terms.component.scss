@@ -1,0 +1,117 @@
+// Terms & Conditions Page Styles
+.terms__area {
+  .terms__content {
+    h2 {
+      font-size: 36px;
+      font-weight: 700;
+      color: #ffc959; // Theme orange color for main heading
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .intro-text {
+      font-size: 18px;
+      color: #6c757d;
+      margin-bottom: 40px;
+      text-align: center;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .terms-section {
+      margin-bottom: 40px;
+      padding-bottom: 30px;
+      border-bottom: 1px solid #e9ecef;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      h3 {
+        font-size: 24px;
+        font-weight: 600;
+        color: #2c3e50; // Black color for subheadings
+        margin-bottom: 15px;
+      }
+
+      p {
+        font-size: 16px;
+        line-height: 1.8;
+        color: #495057;
+        margin-bottom: 15px;
+      }
+
+      .contact-list {
+        list-style: none;
+        padding: 0;
+        margin: 20px 0;
+
+        li {
+          font-size: 16px;
+          color: #495057;
+          margin-bottom: 10px;
+          padding-left: 20px;
+          position: relative;
+
+          &:before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #ffc959; // Theme orange color for bullets
+            font-weight: bold;
+          }
+
+          strong {
+            color: #2c3e50;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+
+    .terms-footer {
+      margin-top: 50px;
+      padding-top: 30px;
+      border-top: 2px solid #e9ecef;
+      text-align: center;
+
+      p {
+        font-size: 16px;
+        color: #6c757d;
+        margin-bottom: 10px;
+
+        strong {
+          color: #ffc959; // Theme orange color for emphasis
+          font-weight: 600;
+        }
+      }
+    }
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .terms__area {
+    .terms__content {
+      h2 {
+        font-size: 28px;
+      }
+
+      .intro-text {
+        font-size: 16px;
+        padding: 0 15px;
+      }
+
+      .terms-section {
+        h3 {
+          font-size: 20px;
+        }
+
+        p {
+          font-size: 15px;
+        }
+      }
+    }
+  }
+}

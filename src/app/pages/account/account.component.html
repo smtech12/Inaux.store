@@ -1,0 +1,320 @@
+<!-- header start -->
+<app-header-one [transparent]="true" [white_bg]="true"></app-header-one>
+<!-- header end -->
+
+<main>
+
+  <!-- breadcrumb start -->
+  <app-breadcrumb-one title="Account" subtitle="Account"></app-breadcrumb-one>
+  <!-- breadcrumb end -->
+
+  <!-- profile area start -->
+  <section class="profile__area pt-120 pb-50 grey-bg">
+    <div class="container">
+      <div class="profile__basic-inner pb-20 bg-white">
+        <div class="row align-items-center">
+          <div class="col-xxl-6 col-md-6">
+            <div class="profile__basic d-md-flex align-items-center">
+              <div class="profile__basic-thumb mr-30">
+                <img src="/assets/img/testimonial/person-1.jpg" alt="">
+              </div>
+              <div class="profile__basic-content">
+                <h3 class="profile__basic-title">
+                  Welcome Back <span>{{customerName}}</span>
+                </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- profile area end -->
+
+  <!-- profile menu area start -->
+  <section class="profile__menu pb-70 grey-bg">
+    <div class="container">
+      <div class="row">
+        <div class="col-xxl-4 col-md-4">
+          <div class="profile__menu-left bg-white mb-50">
+            <h3 class="profile__menu-title"><i class="fa fa-list-alt"></i> Your Menu</h3>
+            <div class="profile__menu-tab">
+              <div class="nav nav-tabs flex-column justify-content-start text-start" id="nav-tab" role="tablist">
+                <button class="nav-link active" id="nav-account-tab" data-bs-toggle="tab" data-bs-target="#nav-account"
+                  type="button" role="tab" aria-controls="nav-account" aria-selected="true"> <i class="fa fa-user"></i>
+                  My Account </button>
+
+                <button class="nav-link" id="nav-order-tab" data-bs-toggle="tab" data-bs-target="#nav-order"
+                  type="button" role="tab" aria-controls="nav-order" aria-selected="false"><i class="fa fa-file"></i>
+                  Orders </button>
+
+                <!-- <button class="nav-link" id="nav-password-tab" data-bs-toggle="tab" data-bs-target="#nav-password" type="button" role="tab" aria-controls="nav-password" aria-selected="false"><i class="fa fa-lock"></i>Change Password</button> -->
+
+                <button class="nav-link"><i class="fa fa-sign-out"></i> Logout</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xxl-8 col-md-8">
+          <div class="profile__menu-right">
+            <div class="tab-content" id="nav-tabContent">
+              <!-- Account Tab -->
+              <div class="tab-pane fade show active" id="nav-account" role="tabpanel" aria-labelledby="nav-account-tab">
+                <div class="profile__info">
+                  <div class="profile__info-top d-flex justify-content-between align-items-center">
+                    <h3 class="profile__info-title">Profile Information</h3>
+                  </div>
+
+                  <div class="profile__info-wrapper white-bg" *ngIf="!isLoadingCustomerInfo">
+                    <div class="profile__info-item" *ngIf="customerInfo">
+                      <p>Name</p>
+                      <h4>{{customerInfo.customerName || customerName}}</h4>
+                    </div>
+                    <div class="profile__info-item" *ngIf="!customerInfo">
+                      <p>Name</p>
+                      <h4>{{customerName}}</h4>
+                    </div>
+                    <div class="profile__info-item" *ngIf="customerInfo">
+                      <p>Email</p>
+                      <h4>
+                        <a [href]="'mailto:' + customerInfo.email" class="__cf_email__">{{customerInfo.email}}</a>
+                      </h4>
+                    </div>
+                    <div class="profile__info-item" *ngIf="customerInfo && customerInfo.phoneNumber">
+                      <p>Phone</p>
+                      <h4>{{customerInfo.phoneNumber}}</h4>
+                    </div>
+                    <div class="profile__info-item" *ngIf="customerInfo && customerInfo.secondaryPhoneNumber">
+                      <p>Secondary Phone</p>
+                      <h4>{{customerInfo.secondaryPhoneNumber}}</h4>
+                    </div>
+                    <div class="profile__info-item" *ngIf="customerInfo && customerInfo.address">
+                      <p>Address</p>
+                      <h4>{{customerInfo.address}}</h4>
+                    </div>
+                    <div class="profile__info-item" *ngIf="!customerInfo">
+                      <p>Email</p>
+                      <h4>N/A</h4>
+                    </div>
+                    <div class="profile__info-item" *ngIf="!customerInfo">
+                      <p>Phone</p>
+                      <h4>N/A</h4>
+                    </div>
+                    <div class="profile__info-item" *ngIf="!customerInfo">
+                      <p>Address</p>
+                      <h4>N/A</h4>
+                    </div>
+                  </div>
+                  <div *ngIf="isLoadingCustomerInfo" class="text-center p-5">
+                    <p>Loading profile information...</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Orders Tab -->
+              <div class="tab-pane fade" id="nav-order" role="tabpanel" aria-labelledby="nav-order-tab">
+                <div class="order__info">
+                  <div class="order__info-top d-flex justify-content-between align-items-center">
+                    <h3 class="order__info-title">My Orders</h3>
+                  </div>
+
+                  <div class="order__list white-bg table-responsive" *ngIf="!isLoading">
+                    <table class="table" *ngIf="orderHistory && orderHistory.length > 0">
+                      <thead>
+                        <tr>
+                          <th scope="col">Order ID</th>
+                          <th scope="col">Date</th>
+                          <th scope="col">Status</th>
+                          <th scope="col">Total</th>
+                          <th scope="col">Details</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let order of orderHistory">
+                          <td class="order__id">{{order.transactionNumber}}</td>
+                          <td>{{formatDate(order.saleDate)}}</td>
+                          <td>
+                            <span class="badge" [ngClass]="{
+                              'bg-success': order.status === 'Completed' || order.status === 'Delivered',
+                              'bg-warning': order.status === 'Pending' || order.status === 'Pending Allocation' || (order.status && order.status.toLowerCase().includes('pending')),
+                              'bg-danger': order.status === 'Cancelled',
+                              'bg-info': order.status === 'Processing' || order.status === 'Shipped',
+                              'bg-secondary': order.status && !(order.status === 'Completed' || order.status === 'Delivered' || order.status === 'Pending' || order.status === 'Pending Allocation' || (order.status && order.status.toLowerCase().includes('pending')) || order.status === 'Cancelled' || order.status === 'Processing' || order.status === 'Shipped')
+                            }">{{order.status || 'N/A'}}</span>
+                          </td>
+                          <td>Rs {{order.netTotal.toFixed(2)}}</td>
+                          <td>
+                            <button type="button" class="order__view-btn me-2" [attr.data-bs-toggle]="'modal'"
+                              [attr.data-bs-target]="'#orderDetailsModal' + order.saleid">
+                              View
+                            </button>
+                            <button *ngIf="order.status === 'Done' && order.isFeedbackGiven === 0" type="button"
+                              class="order__view-btn active" [attr.data-bs-toggle]="'modal'"
+                              [attr.data-bs-target]="'#orderReviewModal'" (click)="openReviewModal(order)">
+                              Review
+                            </button>
+                            <button *ngIf="order.status === 'Done' && order.isFeedbackGiven === 1" type="button"
+                              class="order__view-btn" disabled style="cursor: default; opacity: 0.7;">
+                              <i class="fa fa-check-circle me-1"></i> Reviewed
+                            </button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div *ngIf="orderHistory && orderHistory.length === 0" class="text-center p-5">
+                      <p>No orders found.</p>
+                    </div>
+                  </div>
+                  <div *ngIf="isLoading" class="text-center p-5">
+                    <p>Loading orders...</p>
+                  </div>
+
+                  <!-- Order Details Modals -->
+                  <div *ngFor="let order of orderHistory" class="modal fade" [id]="'orderDetailsModal' + order.saleid"
+                    tabindex="-1" aria-labelledby="orderDetailsModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="orderDetailsModalLabel">Order #{{order.transactionNumber}}</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="mb-3">
+                            <strong>Order Date:</strong> {{formatDate(order.saleDate)}}<br>
+                            <strong>Status:</strong> {{order.status}}<br>
+                            <strong>Type:</strong> {{order.type}}<br>
+                            <strong>Total Amount:</strong> Rs {{order.totalAmount.toFixed(2)}}<br>
+                            <strong>Discount:</strong> Rs {{order.discountAmount.toFixed(2)}}<br>
+                            <strong>Net Total:</strong> Rs {{order.netTotal.toFixed(2)}}
+                          </div>
+                          <h6>Order Items:</h6>
+                          <table class="table table-sm">
+                            <thead>
+                              <tr>
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th>Unit Price</th>
+                                <th>Discount</th>
+                                <th>Total</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let detail of order.details">
+                                <td>
+                                  <div class="d-flex align-items-center">
+                                    <img [src]="getProductImage(detail)" [alt]="detail.productName"
+                                      style="width: 50px; height: 50px; object-fit: cover; margin-right: 10px;">
+                                    <span>{{detail.productName}}</span>
+                                  </div>
+                                </td>
+                                <td>{{detail.quantity}}</td>
+                                <td>Rs {{detail.unitPrice.toFixed(2)}}</td>
+                                <td>{{detail.discountPercentage}}%</td>
+                                <td>Rs {{detail.totalPrice.toFixed(2)}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Feedback Modal (Shared) -->
+                <div class="modal fade" id="orderReviewModal" tabindex="-1" aria-labelledby="orderReviewModalLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="orderReviewModalLabel">Write a Review for Order
+                          #{{currentReviewOrder?.transactionNumber}}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                          (click)="closeReviewModal()"></button>
+                      </div>
+                      <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
+                        <div *ngIf="currentReviewOrder">
+                          <div *ngFor="let item of currentReviewOrder.details; let i = index"
+                            class="review-item mb-4 pb-3 border-bottom">
+                            <div class="d-flex align-items-center mb-10">
+                              <img [src]="getProductImage(item)" class="me-3"
+                                style="width: 60px; height: 60px; object-fit: cover; border-radius: 5px;">
+                              <div>
+                                <h6 class="mb-0">{{item.productName}}</h6>
+                                <small class="text-muted">SKU: {{item.sku}}</small>
+                              </div>
+                            </div>
+
+                            <div class="rating-input mb-15">
+                              <label class="d-block mb-5">Rating:</label>
+                              <div class="rating-stars">
+                                <span *ngFor="let star of [1, 2, 3, 4, 5]" (click)="setRating(i, star)"
+                                  class="cursor-pointer mr-5" style="font-size: 20px;">
+                                  <i
+                                    [ngClass]="reviews[i].Rating >= star ? 'fas fa-star text-warning' : 'far fa-star text-muted'"></i>
+                                </span>
+                              </div>
+                            </div>
+
+                            <div class="remarks-input">
+                              <label class="d-block mb-5">Remarks:</label>
+                              <textarea class="form-control" rows="2" [(ngModel)]="reviews[i].Remarks"
+                                placeholder="Tell us about your experience..."></textarea>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                          (click)="closeReviewModal()">Cancel</button>
+                        <button type="button" class="btn btn-primary"
+                          style="background-color: #ffc959; border-color: #ffc959; color: #000;"
+                          [disabled]="!isFeedbackValid() || isSubmittingFeedback" (click)="submitFeedback()">
+                          {{ isSubmittingFeedback ? 'Submitting...' : 'Submit Review' }}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- <div class="tab-pane fade" id="nav-password" role="tabpanel" aria-labelledby="nav-password-tab">
+                <div class="password__change">
+                  <div class="password__change-top">
+                    <h3 class="password__change-title">Change Password</h3>
+                  </div>
+                  <div class="password__form white-bg">
+                    <form action="#">
+                      <div class="password__input">
+                        <p>Old Password</p>
+                        <input type="password" placeholder="Enter Old Password">
+                      </div>
+                      <div class="password__input">
+                        <p>New Password</p>
+                        <input type="password" placeholder="Enter New Password">
+                      </div>
+                      <div class="password__input">
+                        <p>Confirm Password</p>
+                        <input type="password" placeholder="Confirm Password">
+                      </div>
+                      <div class="password__input">
+                        <button type="submit" class="os-btn os-btn-black">Update password</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- profile menu area end -->
+
+</main>
+
+<!-- footer start -->
+<app-footer-one></app-footer-one>
+<!-- footer end -->

@@ -1,0 +1,225 @@
+// Return & Refund Policy Page Styles
+.policy__area {
+  .policy__content {
+    h2 {
+      font-size: 42px;
+      font-weight: 700;
+      color: #ffc959; // Theme orange color for main heading
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .intro-text {
+      font-size: 18px;
+      color: #6c757d;
+      margin-bottom: 50px;
+      text-align: center;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    .policy-section {
+      margin-bottom: 50px;
+      padding-bottom: 30px;
+      border-bottom: 1px solid #e9ecef;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      h3 {
+        font-size: 28px;
+        font-weight: 600;
+        color: #2c3e50; // Black color for subheadings
+        margin-bottom: 20px;
+      }
+
+      p {
+        font-size: 16px;
+        line-height: 1.8;
+        color: #495057;
+        margin-bottom: 15px;
+      }
+
+      .return-list,
+      .non-return-list {
+        list-style: none;
+        padding: 0;
+        margin: 20px 0;
+
+        li {
+          font-size: 16px;
+          color: #495057;
+          margin-bottom: 12px;
+          padding-left: 25px;
+          position: relative;
+          line-height: 1.6;
+
+          &:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #ffc959; // Theme orange color
+            font-weight: bold;
+            font-size: 18px;
+          }
+
+          strong {
+            color: #2c3e50;
+            font-weight: 600;
+          }
+        }
+      }
+
+      .non-return-list li:before {
+        content: '❌';
+        color: #dc3545; // Red color for non-returnable
+      }
+
+      .return-steps {
+        list-style: none;
+        padding: 0;
+        margin: 20px 0;
+        counter-reset: step-counter;
+
+        li {
+          font-size: 16px;
+          color: #495057;
+          margin-bottom: 12px;
+          padding-left: 35px;
+          position: relative;
+          line-height: 1.6;
+          counter-increment: step-counter;
+
+          &:before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            background: #ffc959; // Theme orange color
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+          }
+        }
+      }
+
+      .refund-list,
+      .exchange-list,
+      .damage-list,
+      .shipping-list {
+        list-style: none;
+        padding: 0;
+        margin: 20px 0;
+
+        li {
+          font-size: 16px;
+          color: #495057;
+          margin-bottom: 12px;
+          padding-left: 25px;
+          position: relative;
+          line-height: 1.6;
+
+          &:before {
+            content: '💰';
+            position: absolute;
+            left: 0;
+            color: #ffc959; // Theme orange color
+            font-size: 18px;
+          }
+        }
+      }
+
+      .exchange-list li:before {
+        content: '🔄';
+      }
+
+      .damage-list li:before {
+        content: '⚠️';
+      }
+
+      .shipping-list li:before {
+        content: '📦';
+      }
+
+      .exception-list {
+        list-style: none;
+        padding: 0;
+        margin: 20px 0;
+
+        li {
+          font-size: 16px;
+          color: #495057;
+          margin-bottom: 12px;
+          padding-left: 25px;
+          position: relative;
+          line-height: 1.6;
+
+          &:before {
+            content: '⚠️';
+            position: absolute;
+            left: 0;
+            color: #ffc959; // Theme orange color
+            font-size: 18px;
+          }
+
+          strong {
+            color: #dc3545; // Red color for exceptions
+            font-weight: 600;
+          }
+        }
+      }
+    }
+
+    .policy-footer {
+      margin-top: 60px;
+      padding-top: 40px;
+      border-top: 2px solid #e9ecef;
+      text-align: center;
+
+      p {
+        font-size: 16px;
+        color: #6c757d;
+        margin-bottom: 10px;
+
+        strong {
+          color: #ffc959; // Theme orange color for emphasis
+          font-weight: 600;
+        }
+      }
+    }
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .policy__area {
+    .policy__content {
+      h2 {
+        font-size: 32px;
+      }
+
+      .intro-text {
+        font-size: 16px;
+        padding: 0 15px;
+      }
+
+      .policy-section {
+        h3 {
+          font-size: 24px;
+        }
+
+        p {
+          font-size: 15px;
+        }
+      }
+    }
+  }
+}

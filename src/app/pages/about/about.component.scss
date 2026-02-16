@@ -1,0 +1,198 @@
+// About Us Page Styles
+.about__area {
+  .about__content {
+    h2 {
+      font-size: 42px;
+      font-weight: 700;
+      color: #ffc959; // Theme orange color
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .intro-text {
+      font-size: 18px;
+      color: #6c757d;
+      margin-bottom: 50px;
+      text-align: center;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    .about-section {
+      margin-bottom: 50px;
+      padding-bottom: 30px;
+      border-bottom: 1px solid #e9ecef;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      h3 {
+        font-size: 28px;
+        font-weight: 600;
+        color: #2c3e50; // Black color for subheadings
+        margin-bottom: 20px;
+      }
+
+      p {
+        font-size: 16px;
+        line-height: 1.8;
+        color: #495057;
+        margin-bottom: 15px;
+      }
+
+      .values-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        margin-top: 30px;
+
+        .value-item {
+          background: #f8f9fa;
+          padding: 25px;
+          border-radius: 10px;
+          text-align: center;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+          &:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+          }
+
+          h4 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2c3e50; // Black color for value headings
+            margin-bottom: 15px;
+          }
+
+          p {
+            font-size: 15px;
+            color: #6c757d;
+            margin-bottom: 0;
+          }
+        }
+      }
+
+      .product-list,
+      .reasons-list {
+        list-style: none;
+        padding: 0;
+        margin: 20px 0;
+
+        li {
+          font-size: 16px;
+          color: #495057;
+          margin-bottom: 12px;
+          padding-left: 25px;
+          position: relative;
+          line-height: 1.6;
+
+          &:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #ffc959; // Theme orange color
+            font-weight: bold;
+            font-size: 18px;
+          }
+
+          strong {
+            color: #2c3e50;
+            font-weight: 600;
+          }
+        }
+      }
+
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 25px;
+
+        .social-link {
+          display: inline-block;
+          padding: 12px 24px;
+          background: #ffc959; // Theme orange color
+          color: white;
+          text-decoration: none;
+          border-radius: 25px;
+          font-weight: 500;
+          transition: background-color 0.3s ease, transform 0.3s ease;
+
+          &:hover {
+            background: #ffb300; // Darker orange on hover
+            color: white;
+            transform: translateY(-2px);
+          }
+
+          i {
+            margin-right: 8px;
+          }
+        }
+      }
+    }
+
+    .about-footer {
+      margin-top: 60px;
+      padding-top: 40px;
+      border-top: 2px solid #e9ecef;
+      text-align: center;
+
+      p {
+        font-size: 18px;
+        color: #6c757d;
+        margin-bottom: 0;
+        line-height: 1.6;
+
+        strong {
+          color: #ffc959; // Theme orange color
+          font-weight: 600;
+        }
+      }
+    }
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .about__area {
+    .about__content {
+      h2 {
+        font-size: 32px;
+      }
+
+      .intro-text {
+        font-size: 16px;
+        padding: 0 15px;
+      }
+
+      .about-section {
+        h3 {
+          font-size: 24px;
+        }
+
+        p {
+          font-size: 15px;
+        }
+
+        .values-grid {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+
+        .social-links {
+          flex-direction: column;
+          align-items: center;
+
+          .social-link {
+            width: 200px;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+}

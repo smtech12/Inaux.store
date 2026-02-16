@@ -1,0 +1,257 @@
+<!-- header start -->
+<app-header-one [transparent]="true" [white_bg]="true"></app-header-one>
+<!-- header end -->
+
+<main>
+
+  <!-- breadcrumb start -->
+  <app-breadcrumb-one title="Checkout" subtitle="Checkout"></app-breadcrumb-one>
+  <!-- breadcrumb end -->
+
+
+  <!-- checkout-area start -->
+  <section class="checkout-area pb-70">
+    <div class="container">
+      <div *ngIf="cartService.getCartProducts().length === 0;else checkoutBlock" class="text-center pt-80 pb-30">
+        <h3 class="py-2">No items found in cart to checkout</h3>
+        <a routerLink="/shop" class="os-btn os-btn-black">
+          Return to shop
+        </a>
+      </div>
+
+      <ng-template #checkoutBlock>
+        <div *ngIf="!isAuthenticated" class="row mb-20">
+          <div class="col-12">
+            <div class="alert alert-warning">
+              Returning customer? <a routerLink="/login">Click here to login</a>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="checkbox-form">
+                  <h3>Billing Details</h3>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="checkout-form-list">
+                        <label>Name <span class="required">*</span></label>
+                        <input type="text" placeholder="Name" formControlName="name" />
+                        <span
+                          *ngIf="checkoutForm.get('name')?.hasError('required') && (checkoutForm.get('name')?.touched || formSubmitted)"
+                          class="text-danger">
+                          Name is required
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="checkout-form-list">
+                        <label>Email</label>
+                        <input type="email" placeholder="Email (Optional)" formControlName="email" />
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="checkout-form-list">
+                        <label>Address <span class="required">*</span></label>
+                        <input type="text" id="address" placeholder="Street address" formControlName="address" />
+                        <!-- error message -->
+                        <span *ngIf="address?.hasError('required') && (address?.touched || formSubmitted)"
+                          class="text-danger">
+                          Address is required
+                        </span>
+                        <!-- error message -->
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="checkout-form-list">
+                        <label>Phone Number <span class="required">*</span></label>
+                        <input type="text" placeholder="Phone Number" id="phoneNumber" formControlName="phoneNumber" />
+                        <!-- error message -->
+                        <span *ngIf="phoneNumber?.hasError('required') && (phoneNumber?.touched || formSubmitted)"
+                          class="text-danger">
+                          Phone Number is required
+                        </span>
+                        <!-- error message -->
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="checkout-form-list">
+                        <label>Secondary Phone Number</label>
+                        <input type="text" placeholder="Secondary Phone Number (optional)" id="secPhoneNumber"
+                          formControlName="secPhoneNumber" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="your-order mb-30 ">
+                  <h3>Your order</h3>
+                  <div class="your-order-table table-responsive">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th class="product-name">Product</th>
+                          <th class="product-total">Total</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let item of cartService.getCartProducts()" class="cart_item">
+                          <td class="product-name">
+                            {{item.title}} <strong class="product-quantity"> × {{item.orderQuantity}}</strong>
+                            <div *ngIf="hasAttributes(item)" class="checkout-attributes">
+                              <span *ngFor="let attrEntry of getAttributeEntries(item)" class="checkout-attribute-item">
+                                <span class="attribute-name">{{attrEntry.name}}:</span>
+                                <span class="attribute-value">{{attrEntry.value}}</span>
+                              </span>
+                            </div>
+                          </td>
+                          <td class="product-total">
+                            <span class="amount">Rs {{(getItemPrice(item) * (item.orderQuantity ||
+                              1)).toFixed(2)}}</span>
+                          </td>
+                        </tr>
+                      </tbody>
+                      
+                      <!-- Coupon Section -->
+                      <tfoot>
+                        <tr class="coupon-section">
+                          <td colspan="2">
+                            <div class="coupon-form">
+                              <div class="coupon-input-group">
+                                <input 
+                                  type="text" 
+                                  class="coupon-input" 
+                                  placeholder="Enter coupon code"
+                                  [(ngModel)]="couponCode"
+                                  [disabled]="couponApplied">
+                                <button 
+                                  type="button" 
+                                  class="coupon-apply-btn"
+                                  (click)="applyCoupon()"
+                                  [disabled]="!couponCode || couponApplied || isApplyingCoupon">
+                                  <span *ngIf="!isApplyingCoupon">Apply</span>
+                                  <span *ngIf="isApplyingCoupon">Applying...</span>
+                                </button>
+                                <button 
+                                  type="button" 
+                                  class="coupon-remove-btn"
+                                  *ngIf="couponApplied"
+                                  (click)="removeCoupon()">
+                                  Remove
+                                </button>
+                              </div>
+                              <div *ngIf="couponMessage" class="coupon-message" [class.success]="couponApplied" [class.error]="!couponApplied">
+                                {{couponMessage}}
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      </tfoot>
+                      
+                      <tfoot>
+                        <tr class="cart-subtotal">
+                          <th>Sub total</th>
+                          <td>
+                            <span class="amount">Rs {{(cartService.totalPriceQuantity().total +
+                              cartService.totalDiscount()).toFixed(2)}}</span>
+                          </td>
+                        </tr>
+                        <tr class="delivery-charges">
+                          <th>Delivery Charges</th>
+                          <td>
+                            <span class="amount">Rs 149.00</span>
+                          </td>
+                        </tr>
+                        <tr class="cart-discount">
+                          <th>Discount</th>
+                          <td>
+                            <span class="amount">-Rs {{cartService.totalDiscount().toFixed(2)}}</span>
+                          </td>
+                        </tr>
+                        <tr *ngIf="couponApplied" class="coupon-discount">
+                          <th>Coupon Discount ({{appliedCouponCode}})</th>
+                          <td>
+                            <span class="amount">-Rs {{getCouponDiscountAmount().toFixed(2)}}</span>
+                          </td>
+                        </tr>
+                        <tr class="order-total">
+                          <th>Order Total</th>
+                          <td><strong><span class="amount">
+                                Rs {{getFinalOrderTotal().toFixed(2)}}
+                              </span></strong>
+                          </td>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+
+                  <div class="payment-method">
+                    <div class="payment-method-info">
+                      <h4>Payment Method</h4>
+                      <p><strong>Cash on Delivery (COD)</strong></p>
+                      <p>Pay with cash when your order is delivered.</p>
+                    </div>
+                    <div class="order-button-payment mt-20">
+                      <button type="submit" [disabled]="isLoading" class="os-btn os-btn-black">
+                        <span *ngIf="!isLoading">Place order</span>
+                        <span *ngIf="isLoading">Placing order...</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+
+      </ng-template>
+    </div>
+  </section>
+  <!-- checkout-area end -->
+
+</main>
+
+
+<!-- Account Created Modal -->
+<div *ngIf="showAccountModal" class="modal-backdrop">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>Account Created Successfully</h3>
+      <button class="close-btn" (click)="closeAccountModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <p class="success-message">An account has been created for you to track your order.</p>
+
+      <div class="credentials-box">
+        <div class="credential-item">
+          <span class="label">Username:</span>
+          <span class="value">{{ createdAccountInfo?.username }}</span>
+        </div>
+        <div class="credential-item" *ngIf="createdAccountInfo?.password">
+          <span class="label">Password:</span>
+          <span class="value">{{ createdAccountInfo?.password }}</span>
+        </div>
+        <div class="credential-item">
+          <span class="label">Phone:</span>
+          <span class="value">{{ createdAccountInfo?.phone }}</span>
+        </div>
+        <div class="credential-item" *ngIf="createdAccountInfo?.transactionNumber">
+          <span class="label">Order ID:</span>
+          <span class="value">{{ createdAccountInfo?.transactionNumber }}</span>
+        </div>
+      </div>
+
+      <p class="note">Please save these credentials for future login.</p>
+    </div>
+    <div class="modal-footer">
+      <button class="os-btn os-btn-black" (click)="closeAccountModal()">Continue Shopping</button>
+    </div>
+  </div>
+</div>
+
+<!-- footer start -->
+<app-footer-one></app-footer-one>
+<!-- footer end -->

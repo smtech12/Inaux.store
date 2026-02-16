@@ -1,0 +1,23 @@
+.cart-attributes {
+  font-size: 12px;
+  line-height: 1.5;
+  margin-top: 5px;
+  
+  .cart-attribute-item {
+    display: inline-block;
+    margin-right: 10px;
+    margin-bottom: 3px;
+    
+    .attribute-name {
+      font-weight: 500;
+      color: #666;
+      margin-right: 3px;
+    }
+    
+    .attribute-value {
+      color: #333;
+      font-weight: 400;
+    }
+  }
+}
+

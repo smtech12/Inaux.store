@@ -1,0 +1,18 @@
+<section class="features__area">
+    <div class="container">
+        <div class="row align-items-center">
+            <div *ngFor="let item of featureData; let last = last" class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                <div class="features__item d-flex align-items-center justify-content-center"
+                    [class.border-right-1]="!last">
+                    <div class="features__icon mr-20">
+                        <i [class]="item.icon"></i>
+                    </div>
+                    <div class="features__content">
+                        <h6>{{item.title}}</h6>
+                        <p>{{item.subtitle}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

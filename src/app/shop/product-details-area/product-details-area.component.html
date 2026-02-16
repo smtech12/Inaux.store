@@ -1,0 +1,129 @@
+<section class="shop__area pb-65">
+  <div class="shop__top grey-bg-6 pt-100 pb-90">
+    <div class="container">
+      <app-product-details-upper [product]="product!"></app-product-details-upper>
+    </div>
+  </div>
+  <div class="shop__bottom">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-12">
+          <div class="product__details-tab mt-40">
+            <div class="product__details-tab-nav text-center mb-45">
+              <nav>
+                <div class="nav nav-tabs justify-content-start justify-content-sm-center" id="pro-details"
+                  role="tablist">
+                  <a class="nav-item nav-link active" id="des-tab" data-bs-toggle="tab" href="#des" role="tab"
+                    aria-controls="des" aria-selected="true">Description</a>
+                  <a class="nav-item nav-link" id="add-tab" data-bs-toggle="tab" href="#add" role="tab"
+                    aria-controls="add" aria-selected="false">Additional Information</a>
+                  <a class="nav-item nav-link" id="review-tab" data-bs-toggle="tab" href="#review" role="tab"
+                    aria-controls="review" aria-selected="false">Reviews ({{product?.reviews?.length}})</a>
+                </div>
+              </nav>
+            </div>
+            <div class="tab-content" id="pro-detailsContent">
+              <div class="tab-pane fade show active" id="des" role="tabpanel">
+                <div class="product__details-des">
+                  <div [innerHTML]="product?.details?.details_text"></div>
+                  <div class="product__details-des-list mb-20">
+                    <ul>
+                      <li *ngFor="let list of product?.details?.details_list">
+                        <span>{{list}}</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="add" role="tabpanel">
+                <div class="product__details-add">
+                  <ul>
+                    <ng-container *ngFor="let attribute of productAttributes">
+                      <li><span>{{attribute.attributeName}}</span></li>
+                      <li><span>{{getAttributeValues(attribute)}}</span></li>
+                    </ng-container>
+                  </ul>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="review" role="tabpanel">
+                <div class="product__details-review">
+                  <div class="postbox__comments">
+                    <div class="postbox__comment-title mb-30">
+                      <h3>Reviews ({{product?.reviews?.length}})</h3>
+                    </div>
+                    <div class="latest-comments mb-30">
+                      <ul>
+                        <li *ngFor="let r of product?.reviews">
+                          <div class="comments-box">
+                            <div class="comments-avatar">
+                              <img [src]="r.img || defaultImage" (error)="r.img = defaultImage" alt="user"
+                                style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%;">
+                            </div>
+                            <div class="comments-text">
+                              <div class="avatar-name">
+                                <h5>{{r.name}}</h5>
+                                <span> - {{r.time}} </span>
+                              </div>
+                              <div class="user-rating">
+                                <ul>
+                                  <li *ngFor="let star of stars">
+                                    <a href="#">
+                                      <i [ngClass]="r.rating >= star ? 'fas fa-star' : 'fal fa-star'"></i>
+                                    </a>
+                                  </li>
+                                </ul>
+                              </div>
+                              <p>{{r.review_desc}}</p>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="post-comments-form mb-100">
+                    <div class="post-comments-title mb-30">
+                      <h3>Your Review</h3>
+                      <div class="post-rating">
+                        <span>Your Rating :</span>
+                        <ul>
+                          <li>
+                            <a href="#">
+                              <i class="fal fa-star"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#">
+                              <i class="fal fa-star"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#">
+                              <i class="fal fa-star"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#">
+                              <i class="fal fa-star"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#">
+                              <i class="fal fa-star"></i>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <!-- review form start -->
+                    <app-review-form></app-review-form>
+                    <!-- review form end -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

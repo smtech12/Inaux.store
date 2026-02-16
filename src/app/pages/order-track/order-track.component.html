@@ -1,0 +1,152 @@
+<!-- header start -->
+<app-header-one [transparent]="true" [white_bg]="true"></app-header-one>
+<!-- header end -->
+
+<main>
+
+  <!-- breadcrumb start -->
+  <app-dynamic-page-title title="Order Tracking" subtitle="Track Your Order"></app-dynamic-page-title>
+  <!-- breadcrumb end -->
+
+  <!-- order tracking area start -->
+  <section class="order-track-area pt-100 pb-100">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          
+          <!-- Track Order Form -->
+          <div class="order-track-form mb-50">
+            <div class="track-form-inner">
+              <h3 class="track-title">Track Your Order</h3>
+              <p class="track-desc">Enter your order number to track your package</p>
+              
+              <div class="track-form-box">
+                <div class="input-group">
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    placeholder="Enter your order number (e.g., ORD-2024-001)"
+                    [(ngModel)]="orderNumber"
+                    (keyup.enter)="trackOrder()"
+                  >
+                  <button class="track-btn" (click)="trackOrder()" [disabled]="loading">
+                    <span *ngIf="!loading">Track Order</span>
+                    <span *ngIf="loading">
+                      <i class="fas fa-spinner fa-spin"></i> Tracking...
+                    </span>
+                  </button>
+                </div>
+                
+                <div *ngIf="error" class="alert alert-danger mt-3">
+                  <i class="fas fa-exclamation-circle"></i> {{ error }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Order Details -->
+          <div *ngIf="orderData" class="order-details">
+            <div class="order-details-header">
+              <h3>Order Details</h3>
+              <div class="order-status-badge" [style.background-color]="getStatusColor(orderData.sale.status)">
+                {{ orderData.sale.status }}
+              </div>
+            </div>
+
+            <!-- Order Information -->
+            <div class="order-info-card">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="info-group">
+                    <h6>Order Number</h6>
+                    <p>{{ orderData.sale.transactionNumber }}</p>
+                  </div>
+                  <div class="info-group">
+                    <h6>Order Date</h6>
+                    <p>{{ getFormattedDate(orderData.sale.createdDate) }}</p>
+                  </div>
+                  <div class="info-group">
+                    <h6>Total Amount</h6>
+                    <p class="order-total">Rs {{ orderData.sale.netTotal.toFixed(2) }}</p>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="info-group">
+                    <h6>Customer Name</h6>
+                    <p>{{ orderData.sale.customerName }}</p>
+                  </div>
+                  <div class="info-group">
+                    <h6>Email</h6>
+                    <p>{{ orderData.sale.email || 'Customer email will be available here' }}</p>
+                  </div>
+                  <div class="info-group">
+                    <h6>Phone</h6>
+                    <p>{{ orderData.sale.phoneNumber }}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="info-group">
+                <h6>Shipping Address</h6>
+                <p>Shipping address will be available here</p>
+              </div>
+            </div>
+
+            <!-- Order Items -->
+            <div class="order-items-card">
+              <h4>Order Items</h4>
+              <div class="order-items-list">
+              <div *ngFor="let item of orderData.details" class="order-item">
+                  <div class="item-image">
+                    <img [src]="getProductImage(item)" [alt]="item.productName">
+                  </div>
+                  <div class="item-details">
+                    <h6>{{ item.productName }}</h6>
+                    <p>Quantity: {{ item.quantity }}</p>
+                    <p>SKU: {{ item.sku }}</p>
+                    <p *ngIf="item.discountPercentage > 0" class="discount-info">
+                      <span class="discount-badge">{{ item.discountPercentage }}% OFF</span>
+                      <span class="original-price">Rs {{ item.unitPrice.toFixed(2) }}</span>
+                      <span class="discounted-price">Rs {{ (item.unitPrice * (1 - item.discountPercentage / 100)).toFixed(2) }}</span>
+                    </p>
+                    <p *ngIf="item.discountPercentage === 0 || !item.discountPercentage" class="no-discount">
+                      <span class="regular-price">Rs {{ item.unitPrice.toFixed(2) }}</span>
+                    </p>
+                  </div>
+                  <div class="item-price">
+                    <p>Rs {{ item.totalPrice.toFixed(2) }}</p>
+                    <small>Total: Rs {{ item.totalPrice.toFixed(2) }}</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tracking Timeline -->
+            <div class="tracking-timeline-card">
+              <h4>Tracking History</h4>
+              <div class="timeline">
+                <div *ngFor="let event of getTrackingTimeline(); let i = index" class="timeline-item" 
+                     [class.active]="event.completed">
+                  <div class="timeline-dot" [style.background-color]="getStatusColor(event.status)"></div>
+                  <div class="timeline-content">
+                    <div class="timeline-header">
+                      <h6>{{ event.status }}</h6>
+                      <span class="timeline-date">{{ getFormattedDate(event.date) }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- order tracking area end -->
+
+</main>
+
+<!-- footer start -->
+<app-footer-one></app-footer-one>
+<!-- footer end -->

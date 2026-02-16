@@ -1,0 +1,329 @@
+<div class="row">
+  <div [ngClass]="
+      style_2
+        ? 'col-xl-5 col-lg-5 col-md-6 col-sm-12 col-12'
+        : 'col-xl-6 col-lg-6'
+    ">
+    <div *ngIf="!style_2" class="product__modal-box d-flex">
+      <div class="product__modal-nav mr-20">
+        <nav>
+          <div class="nav nav-tabs" id="product-details" role="tablist">
+            <a *ngFor="let img of product.related_images" class="nav-item nav-link mb-1 cursor-pointer"
+              [class.active]="img === productService.activeImg">
+              <div class="product__nav-img w-img" (click)="productService.handleImageActive(img)">
+                <img [src]="img" alt="product-img" style="width: 92px; height: 117px" />
+              </div>
+            </a>
+          </div>
+        </nav>
+      </div>
+      <div class="mb-20">
+        <div class="product__modal-img product__thumb w-img">
+          <img [src]="productService.activeImg" alt="product-img" />
+          <div *ngIf="product.discount || product.new" class="product__sale">
+            <span *ngIf="product.new || product.discount" class="new">new</span>
+            <span *ngIf="product.discount" class="percent">-{{ product.discount }}%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="style_2" class="product__modal-box">
+      <div class="mb-20">
+        <div class="product__modal-img w-img">
+          <img [src]="productService.activeImg" alt="product-img" />
+        </div>
+      </div>
+      <nav>
+        <div class="nav nav-tabs" id="product-details" role="tablist">
+          <a *ngFor="let img of product.related_images" class="nav-item nav-link cursor-pointer me-2"
+            [class.active]="img === productService.activeImg">
+            <div class="product__nav-img w-img" (click)="productService.handleImageActive(img)">
+              <img [src]="img" alt="product-img" style="width: 92px; height: 117px" />
+            </div>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </div>
+
+  <div [ngClass]="
+      style_2
+        ? 'col-xl-7 col-lg-7 col-md-6 col-sm-12 col-12'
+        : 'col-xl-6 col-lg-6'
+    ">
+    <div class="product__modal-content product__modal-content-2">
+      <h4>
+        <a [routerLink]="['/shop/product-details', product.id]">{{
+          product.title
+          }}</a>
+      </h4>
+      <div class="rating rating-shop mb-15">
+        <ul>
+          <li *ngFor="let i of getStarArray()">
+            <span><i [class]="getStarClass(i, productDetailDTO?.averageRating || 0)"></i></span>
+          </li>
+        </ul>
+        <span class="rating-no ml-10 rating-left">
+          {{ productDetailDTO?.reviewCount || 0 }} rating(s)
+        </span>
+        <span class="review rating-left"><a href="#">Add your Review</a></span>
+      </div>
+      <div class="product__price-2 mb-25">
+        <span>Rs {{ product.price.toFixed(2) }}</span>
+        <span *ngIf="product.old_price" class="old-price">Rs {{ product.old_price.toFixed(2) }}</span>
+      </div>
+      <div class="product-stock mb-15">
+        <span *ngIf="productDetailDTO?.isVariable && selectedVariant">
+          Stock: {{ selectedVariant.stockStatus || (selectedVariant.stockUnits === 0 && selectedVariant.stockQuantity
+          === 0 ? 'Out of Stock' : 'In Stock') }}
+        </span>
+        <span *ngIf="productDetailDTO?.isVariable && !selectedVariant">
+          Stock: {{ product.stockStatus }}
+        </span>
+        <span *ngIf="!productDetailDTO?.isVariable">
+          Stock: {{ product.stockStatus }}
+        </span>
+      </div>
+      <!-- Size Guide Button -->
+      <div class="product__size-guide mb-25">
+        <button (click)="openSizeGuideModal()" class="size-guide-btn-main">
+          <i class="fas fa-ruler"></i>
+          <span>Size Guide</span>
+        </button>
+      </div>
+      <div class="product__modal-des mb-30">
+        <div [innerHTML]="product.sm_desc"></div>
+      </div>
+      <div class="product__policy-highlights mb-30">
+        <div class="policy-item">
+          <i class="fas fa-check-circle"></i>
+          <span>10 Days Returns</span>
+        </div>
+        <div class="policy-item">
+          <i class="fas fa-exchange-alt"></i>
+          <span>Easy Exchange</span>
+        </div>
+        <div class="policy-item">
+          <i class="fas fa-box"></i>
+          <span>Limited Stock</span>
+        </div>
+      </div>
+      <div class="product__modal-form mb-30">
+        <form action="#">
+          <!-- Dynamic Attributes - Only show attributes that exist -->
+          <div *ngFor="let attribute of availableAttributes"
+            class="product__modal-input product__attribute-buttons mb-20" [ngClass]="
+              attribute.attributeName?.toLowerCase() ||
+              'attribute-' + attribute.attributeId
+            ">
+            <label>{{ attribute.attributeName || "Attribute" }}
+              <span class="required-asterisk">*</span></label>
+            <div class="attribute-button-group">
+              <button *ngFor="let value of getAttributeValues(attribute)" type="button" class="attribute-btn"
+                [class.active]="
+                  getSelectedValue(attribute.attributeId) === value
+                " [class.out-of-stock-attr]="isAttributeValueOutOfStock(attribute.attributeId, value)"
+                [title]="isAttributeValueOutOfStock(attribute.attributeId, value) ? 'Out of stock for this selection' : ''"
+                (click)="onAttributeChange(attribute.attributeId, value)">
+                {{ value }}
+              </button>
+            </div>
+          </div>
+          <!-- Fallback to old structure if no attributes from API -->
+          <div *ngIf="availableAttributes.length === 0 && product.sizes.length > 0"
+            class="product__modal-input product__attribute-buttons size mb-20">
+            <label>
+              Size <span class="required-asterisk">*</span>
+              <button type="button" class="size-guide-btn" (click)="openSizeGuide()">
+                <i class="fas fa-ruler"></i>
+                Size Guide
+              </button>
+            </label>
+            <div class="attribute-button-group">
+              <button *ngFor="let size of product.sizes" type="button" class="attribute-btn"
+                [class.active]="getSelectedValue('size') === size" (click)="onAttributeChange('size', size)">
+                {{ size }}
+              </button>
+            </div>
+          </div>
+          <div *ngIf="
+              availableAttributes.length === 0 && product.colors.length > 0
+            " class="product__modal-input product__attribute-buttons color mb-20">
+            <label>Color <span class="required-asterisk">*</span></label>
+            <div class="attribute-button-group">
+              <button *ngFor="let clr of product.colors" type="button" class="attribute-btn"
+                [class.active]="getSelectedValue('color') === clr" (click)="onAttributeChange('color', clr)">
+                {{ clr }}
+              </button>
+            </div>
+          </div>
+          <div class="product__modal-required mb-5" *ngIf="
+              availableAttributes.length > 0 ||
+              product.sizes.length > 0 ||
+              product.colors.length > 0
+            ">
+            <span>Repuired Fiields *</span>
+          </div>
+          <div class="pro-quan-area d-sm-flex align-items-center">
+            <div class="product-quantity-title">
+              <label>Quantity</label>
+            </div>
+            <div class="product-quantity mr-20 mb-20">
+              <div class="cart-plus-minus">
+                <input type="text" [value]="cartService.orderQuantity" disabled readonly />
+                <div (click)="cartService.decrement()" class="dec qtybutton">
+                  -
+                </div>
+                <div (click)="cartService.increment()" class="inc qtybutton">
+                  +
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="pro-cart-btn mt-30">
+            <!-- Row 1: Add to Cart and Buy Now buttons -->
+            <div class="cart-buttons-row" *ngIf="modalMode === 'cart'">
+              <a (click)="addToCartFromModal()" class="add-cart-btn cursor-pointer"
+                [class.disabled]="hasAttributes() && !areAllAttributesSelected() || isOutOfStockForActions()"
+                [style.opacity]="hasAttributes() && !areAllAttributesSelected() || isOutOfStockForActions() ? '0.6' : '1'"
+                [title]="isOutOfStockForActions() ? 'Selected variant is out of stock' : (hasAttributes() && !areAllAttributesSelected() ? 'Please select all required attributes' : '')">
+                Add to Cart
+              </a>
+              <a (click)="!isBuyNowDisabled() && buyNow()" class="add-cart-btn buy-now-dark cursor-pointer buyNowBTN"
+                [class.disabled]="isBuyNowDisabled()" [style.opacity]="isBuyNowDisabled() ? '0.6' : '1'"
+                [title]="isBuyNowDisabled() ? (isOutOfStockForActions() ? 'Selected variant is out of stock' : 'Please select all required attributes') : ''">
+                Buy Now
+              </a>
+            </div>
+            <!-- Wishlist button (when in wishlist mode) -->
+            <a *ngIf="modalMode === 'wishlist'" (click)="addToWishlistFromModal()" class="add-cart-btn cursor-pointer"
+              [class.disabled]="hasAttributes() && !areAllAttributesSelected() || isOutOfStockForActions()"
+              [style.opacity]="hasAttributes() && !areAllAttributesSelected() || isOutOfStockForActions() ? '0.6' : '1'"
+              [title]="isOutOfStockForActions() ? 'Selected variant is out of stock' : (hasAttributes() && !areAllAttributesSelected() ? 'Please select all required attributes' : '')">
+              Add to Wishlist
+            </a>
+            <!-- Row 2: WhatsApp button -->
+            <button (click)="openWhatsApp()" class="whatsapp-btn cursor-pointer" [disabled]="!contactPhone" [title]="
+                  !contactPhone
+                    ? 'Contact number not available'
+                    : 'Order on WhatsApp'
+                ">
+              <i class="fab fa-whatsapp"></i>
+              Order on WhatsApp
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <div class="product__disclaimer mb-30">
+        <div class="disclaimer-content">
+          <h6>Disclaimer</h6>
+          <p>
+            The actual color of the product may vary slightly due to
+            photographic lighting sources or your monitor/screen calibration. We
+            strive to display the product colors as accurately as possible, but
+            please understand that the actual colors you see will depend on your
+            computer monitor and may not be completely accurate.
+          </p>
+        </div>
+      </div>
+
+      <div class="product__delivery-timeline mb-30">
+        <h6>Delivery Timeline</h6>
+        <div class="timeline">
+          <div class="timeline-item completed">
+            <div class="timeline-icon">
+              <i class="fas fa-check"></i>
+            </div>
+            <div class="timeline-content">
+              <h6>Ordered</h6>
+              <p>{{ orderedDate }}</p>
+            </div>
+          </div>
+          <div class="timeline-item active">
+            <div class="timeline-icon">
+              <i class="fas fa-box"></i>
+            </div>
+            <div class="timeline-content">
+              <h6>Order Ready</h6>
+              <p>{{ orderReadyStartDate }} - {{ orderReadyEndDate }}</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-icon">
+              <i class="fas fa-truck"></i>
+            </div>
+            <div class="timeline-content">
+              <h6>Delivered</h6>
+              <p>{{ deliveryStartDate }} - {{ deliveryEndDate }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Countdown Timer (moved below delivery timeline) -->
+      <div *ngIf="showCountdown" class="product__countdown-timer mb-30">
+        <div class="countdown-display">
+          <i class="fas fa-clock"></i>
+          <span class="countdown-text">{{ countdownTime }}</span>
+        </div>
+      </div>
+
+      <div *ngIf="bottomShow">
+        <div class="product__tag mb-25">
+          <span>Category:</span>
+          <span><a class="cursor-pointer">{{ product.category }}</a></span>
+        </div>
+        <div class="product__share">
+          <span>Share :</span>
+          <ul>
+            <li>
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="fab fa-behance"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="fab fa-youtube"></i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Size Guide Modal -->
+<div *ngIf="showSizeGuideModal" class="size-guide-modal-overlay" (click)="closeSizeGuideModal()">
+  <div class="size-guide-modal" (click)="$event.stopPropagation()">
+    <div class="size-guide-modal-header">
+      <h5>Size Guide</h5>
+      <button class="size-guide-modal-close" (click)="closeSizeGuideModal()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="size-guide-modal-content">
+      <div *ngIf="sizeGuideLoading" class="size-guide-loading">
+        <i class="fas fa-spinner fa-spin"></i>
+        <p>Loading size guide...</p>
+      </div>
+      <div *ngIf="!sizeGuideLoading && sizeGuideItems.length === 0" class="size-guide-empty">
+        <i class="fas fa-ruler"></i>
+        <p>No size guide available</p>
+      </div>
+      <div *ngIf="!sizeGuideLoading && sizeGuideItems.length > 0" class="size-guide-images">
+        <div *ngFor="let item of sizeGuideItems" class="size-guide-item">
+          <img [src]="item.imageUrl" [alt]="item.title" />
+          <p>{{ item.title }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

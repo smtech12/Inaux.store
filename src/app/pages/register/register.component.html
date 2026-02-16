@@ -1,0 +1,82 @@
+<!-- header start -->
+<app-header-one [transparent]="true" [white_bg]="true"></app-header-one>
+<!-- header end -->
+
+<main>
+
+  <!-- breadcrumb start -->
+  <app-breadcrumb-one title="Register" subtitle="Register"></app-breadcrumb-one>
+  <!-- breadcrumb end -->
+
+  <!-- register Area start-->
+  <section class="login-area pt-100 pb-100">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+          <div class="basic-login">
+            <h3 class="text-center mb-60">Signup From Here</h3>
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+              <div class="mb-20">
+                <label for="name">Name <span>*</span></label>
+                <input id="name" type="text" placeholder="Enter your full name" formControlName="name" />
+                <span *ngIf="name?.hasError('required') && (name?.touched || formSubmitted)" class="text-danger">
+                  Name is required
+                </span>
+              </div>
+              <div class="mb-20">
+                <label for="email-id">Email Address <span>*</span></label>
+                <input id="email" type="email" placeholder="Email address..." formControlName="email" />
+                <span
+                  *ngIf="(email?.hasError('required') && email?.touched) || (email?.hasError('email') && email?.dirty) || (formSubmitted && !email?.value)"
+                  class="text-danger">
+                  Email is required and must be a valid email address
+                </span>
+              </div>
+              <div class="mb-20">
+                <label for="password">Password <span>*</span></label>
+                <div class="password-input-wrapper">
+                  <input id="password" [type]="isShowPass ? 'text' : 'password'" placeholder="Enter password..."
+                    formControlName="password" class="password-input" />
+                  <span class="password-toggle" (click)="handleShowPass()">
+                    <i [class]="isShowPass ? 'fal fa-eye-slash' : 'fal fa-eye'"></i>
+                  </span>
+                </div>
+                <span
+                  *ngIf="(password?.hasError('required') && password?.touched) || (password?.errors?.['minlength'] && password?.dirty) || (formSubmitted && !password?.value)"
+                  class="text-danger">
+                  Password is required and must be at least 6 characters
+                </span>
+              </div>
+              <div class="mb-20">
+                <label for="phoneNumber">Phone Number</label>
+                <input id="phoneNumber" type="tel" placeholder="Enter phone number (optional)"
+                  formControlName="phoneNumber" />
+              </div>
+              <div class="mb-20">
+                <label for="secPhoneNumber">Secondary Phone Number</label>
+                <input id="secPhoneNumber" type="tel" placeholder="Enter secondary phone number (optional)"
+                  formControlName="secPhoneNumber" />
+              </div>
+              <div class="mb-30">
+                <label for="address">Address</label>
+                <textarea id="address" rows="3" placeholder="Enter your address (optional)" formControlName="address"
+                  class="address-textarea"></textarea>
+              </div>
+              <button type="submit" class="os-btn w-100" [disabled]="isLoading">
+                <span *ngIf="!isLoading">Register Now</span>
+                <span *ngIf="isLoading">Registering...</span>
+              </button>
+              <div class="or-divide"><span>or</span></div>
+              <a routerLink="/login" class="os-btn os-btn-black w-100">Login Now</a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- register Area End-->
+</main>
+
+<!-- footer start -->
+<app-footer-one></app-footer-one>
+<!-- footer end -->

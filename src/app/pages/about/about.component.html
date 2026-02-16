@@ -1,0 +1,113 @@
+<!-- header start -->
+<app-header-one [transparent]="true"></app-header-one>
+<!-- header end -->
+
+<main>
+
+  <!-- breadcrumb start -->
+  <app-dynamic-page-title title="About Us" subtitle="About" sectionName="Product Banner" fallbackBg="/assets/img/page-title/page-title-2.png" [useFallbackOnly]="false"></app-dynamic-page-title>
+  <!-- breadcrumb end -->
+
+  <!-- about area start -->
+  <section class="about__area pb-100 pt-95">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-12">
+          <div class="about__content">
+            <h2>About Hala Brand</h2>
+            <p class="intro-text">Welcome to Hala Brand, where tradition meets innovation in the world of premium headwear and accessories.</p>
+            
+            <div class="about-section">
+              <h3>Our Story</h3>
+              <p>Hala Brand was founded with a vision to bring together the rich heritage of traditional headwear with modern design sensibilities. Our journey began with a simple mission: to create high-quality, stylish headwear that celebrates cultural identity while embracing contemporary fashion.</p>
+            </div>
+
+            <div class="about-section">
+              <h3>Our Mission</h3>
+              <p>At Hala Brand, we are committed to providing our customers with exceptional headwear that combines quality craftsmanship, innovative design, and cultural authenticity. We strive to be the leading destination for those seeking premium headwear that reflects their identity and style.</p>
+            </div>
+
+            <div class="about-section">
+              <h3>Our Values</h3>
+              <div class="values-grid">
+                <div class="value-item">
+                  <h4>Quality</h4>
+                  <p>We never compromise on quality. Every piece is crafted with attention to detail and the finest materials.</p>
+                </div>
+                <div class="value-item">
+                  <h4>Tradition</h4>
+                  <p>We honor cultural heritage while embracing modern design principles to create timeless pieces.</p>
+                </div>
+                <div class="value-item">
+                  <h4>Innovation</h4>
+                  <p>We continuously explore new designs and techniques to stay ahead of fashion trends.</p>
+                </div>
+                <div class="value-item">
+                  <h4>Customer Satisfaction</h4>
+                  <p>Your satisfaction is our priority. We're dedicated to providing exceptional service and products.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="about-section">
+              <h3>Our Products</h3>
+              <p>Our collection features a wide range of headwear including:</p>
+              <ul class="product-list">
+                <li>Traditional Caps and Hats</li>
+                <li>Modern Headwear Designs</li>
+                <li>Cultural and Religious Headwear</li>
+                <li>Custom and Limited Edition Pieces</li>
+                <li>Accessories and Complementary Items</li>
+              </ul>
+            </div>
+
+            <div class="about-section">
+              <h3>Why Choose Hala Brand?</h3>
+              <ul class="reasons-list">
+                <li><strong>Premium Quality:</strong> Only the finest materials and craftsmanship</li>
+                <li><strong>Unique Designs:</strong> Exclusive patterns and styles you won't find elsewhere</li>
+                <li><strong>Cultural Authenticity:</strong> Designs that respect and celebrate heritage</li>
+                <li><strong>Customer Service:</strong> Dedicated support for all your needs</li>
+                <li><strong>Fast Shipping:</strong> Quick and reliable delivery nationwide</li>
+              </ul>
+            </div>
+
+            <div class="about-section">
+              <h3>Our Commitment</h3>
+              <p>We are committed to sustainable practices and ethical sourcing. We work closely with our suppliers to ensure fair labor practices and environmentally responsible production methods.</p>
+            </div>
+
+            <div class="about-section">
+              <h3>Join Our Community</h3>
+              <p>Be part of the Hala Brand family. Follow us on social media and stay updated with our latest collections, exclusive offers, and cultural insights.</p>
+              <div class="social-links">
+                <a *ngFor="let social of socialMediaItems" 
+                   [href]="social.redirectUrl" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   class="social-link">
+                  <i [class]="getIconClass(social.title)"></i>
+                  {{ social.title }}
+                </a>
+              </div>
+            </div>
+
+            <div class="about-footer">
+              <p><strong>Thank you</strong> for choosing Hala Brand. We look forward to being part of your journey and helping you express your unique style through our premium headwear collection.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- about area end -->
+
+  <!-- subscribe area start -->
+  <app-subscribe-area></app-subscribe-area>
+  <!-- subscribe area end -->
+
+</main>
+
+<!-- footer start -->
+<app-footer-one></app-footer-one>
+<!-- footer end -->

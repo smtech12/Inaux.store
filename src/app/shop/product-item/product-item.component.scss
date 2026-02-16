@@ -1,0 +1,28 @@
+// Ensure all product images have the same size
+.product__thumb {
+  .w-img {
+    display: block;
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%; // Maintain square aspect ratio (1:1) - adjust as needed
+    position: relative;
+    overflow: hidden;
+    
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover; // Crop to fit while maintaining aspect ratio
+      display: block;
+    }
+    
+    .product__thumb-2 {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
