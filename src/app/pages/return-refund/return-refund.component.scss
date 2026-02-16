@@ -11,7 +11,7 @@
 
     .intro-text {
       font-size: 18px;
-      color: #6c757d;
+      color: #adb5bd;
       margin-bottom: 50px;
       text-align: center;
       max-width: 800px;
@@ -23,7 +23,7 @@
     .policy-section {
       margin-bottom: 50px;
       padding-bottom: 30px;
-      border-bottom: 1px solid #e9ecef;
+      border-bottom: 1px solid #333333;
 
       &:last-child {
         border-bottom: none;
@@ -32,14 +32,14 @@
       h3 {
         font-size: 28px;
         font-weight: 600;
-        color: #2c3e50; // Black color for subheadings
+        color: #ffffff;
         margin-bottom: 20px;
       }
 
       p {
         font-size: 16px;
         line-height: 1.8;
-        color: #495057;
+        color: #dee2e6;
         margin-bottom: 15px;
       }
 
@@ -51,7 +51,7 @@
 
         li {
           font-size: 16px;
-          color: #495057;
+          color: #dee2e6;
           margin-bottom: 12px;
           padding-left: 25px;
           position: relative;
@@ -67,7 +67,7 @@
           }
 
           strong {
-            color: #2c3e50;
+            color: #ffffff;
             font-weight: 600;
           }
         }
@@ -86,7 +86,7 @@
 
         li {
           font-size: 16px;
-          color: #495057;
+          color: #dee2e6;
           margin-bottom: 12px;
           padding-left: 35px;
           position: relative;
@@ -121,7 +121,7 @@
 
         li {
           font-size: 16px;
-          color: #495057;
+          color: #dee2e6;
           margin-bottom: 12px;
           padding-left: 25px;
           position: relative;
@@ -156,7 +156,7 @@
 
         li {
           font-size: 16px;
-          color: #495057;
+          color: #dee2e6;
           margin-bottom: 12px;
           padding-left: 25px;
           position: relative;
@@ -181,12 +181,12 @@
     .policy-footer {
       margin-top: 60px;
       padding-top: 40px;
-      border-top: 2px solid #e9ecef;
+      border-top: 2px solid #333333;
       text-align: center;
 
       p {
         font-size: 16px;
-        color: #6c757d;
+        color: #adb5bd;
         margin-bottom: 10px;
 
         strong {

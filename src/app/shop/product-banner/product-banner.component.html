@@ -15,7 +15,7 @@
             <h4><a [routerLink]="['/shop/product-details', item.id]">{{item.title}}</a></h4>
             <p [ngStyle]="{'max-width.px': style_3 ? 250 : 450}">{{ style_3 ? item.sm_desc.slice(0, 50) : item.sm_desc
               }}</p>
-            <a [routerLink]="['/shop/product-details', item.id]" class="os-btn os-btn-2">buy now /
+            <a [routerLink]="['/shop/product-details', item.id]" class="add-cart-btn">buy now /
               <span>Rs {{item.price.toFixed(2)}}</span>
             </a>
           </div>

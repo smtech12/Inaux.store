@@ -1,10 +1,10 @@
 .features__area {
-    background-color: #fff;
+    background-color: #121212;
 }
 
 .features__item {
     padding: 20px 0;
-    
+
     @media (max-width: 991px) {
         border-right: 0 !important;
         justify-content: flex-start !important;
@@ -13,14 +13,14 @@
     }
 
     &.border-right-1 {
-        border-right: 1px solid #e5e5e5;
+        border-right: 1px solid #333333;
     }
 }
 
 .features__icon {
     i {
         font-size: 30px;
-        color: #000;
+        color: #ffc959;
     }
 }
 
@@ -30,16 +30,17 @@
         font-weight: 700;
         margin-bottom: 2px;
         text-transform: capitalize;
-        color: #000;
+        color: #ffffff;
     }
+
     p {
         font-size: 14px;
         margin-bottom: 0;
         line-height: 1.2;
-        color: #666;
+        color: #adb5bd;
     }
 }
 
 .border-bottom-1 {
-    border-bottom: 1px solid #ebebeb;
+    border-bottom: 1px solid #333333;
 }

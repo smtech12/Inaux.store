@@ -87,7 +87,7 @@
       </div>
       <!-- Size Guide Button -->
       <div class="product__size-guide mb-25">
-        <button (click)="openSizeGuideModal()" class="size-guide-btn-main">
+        <button (click)="openSizeGuideModal()" class="size-guide-btn-main cursor-pointer">
           <i class="fas fa-ruler"></i>
           <span>Size Guide</span>
         </button>
@@ -135,7 +135,7 @@
             class="product__modal-input product__attribute-buttons size mb-20">
             <label>
               Size <span class="required-asterisk">*</span>
-              <button type="button" class="size-guide-btn" (click)="openSizeGuide()">
+              <button type="button" class="size-guide-btn ms-2" (click)="openSizeGuide()">
                 <i class="fas fa-ruler"></i>
                 Size Guide
               </button>
@@ -190,7 +190,7 @@
                 [title]="isOutOfStockForActions() ? 'Selected variant is out of stock' : (hasAttributes() && !areAllAttributesSelected() ? 'Please select all required attributes' : '')">
                 Add to Cart
               </a>
-              <a (click)="!isBuyNowDisabled() && buyNow()" class="add-cart-btn buy-now-dark cursor-pointer buyNowBTN"
+              <a (click)="!isBuyNowDisabled() && buyNow()" class="add-cart-btn cursor-pointer"
                 [class.disabled]="isBuyNowDisabled()" [style.opacity]="isBuyNowDisabled() ? '0.6' : '1'"
                 [title]="isBuyNowDisabled() ? (isOutOfStockForActions() ? 'Selected variant is out of stock' : 'Please select all required attributes') : ''">
                 Buy Now

@@ -6,11 +6,12 @@
   .size-guide-btn-main {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
     padding: 12px 20px;
-    background-color: $theme-color;
-    color: white;
-    border: none;
+    background-color: transparent;
+    color: $theme-color;
+    border: 1px solid $theme-color;
     border-radius: 5px;
     font-size: 14px;
     font-weight: 500;
@@ -22,11 +23,38 @@
     }
 
     &:hover {
-      background-color: darken($theme-color, 10%);
+      background-color: $theme-color;
+      color: #000;
       transform: translateY(-1px);
     }
   }
 }
+
+.size-guide-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 15px;
+  background-color: transparent;
+  color: $theme-color;
+  border: 1px solid $theme-color;
+  border-radius: 5px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: $theme-color;
+    color: #000;
+  }
+
+  i {
+    font-size: 14px;
+  }
+}
+
 
 // Size Guide Modal Styles
 .size-guide-modal-overlay {
@@ -413,18 +441,7 @@
       min-width: 140px !important; // Ensure enough room for text
     }
 
-    // Buy Now button dark style
-    .buy-now-dark {
-      background-color: #ffc959 !important;
-      color: #000 !important;
-      border-color: #ffc959 !important;
 
-      &:hover {
-        background-color: #000 !important;
-        color: #fff !important;
-        border-color: #000 !important;
-      }
-    }
 
     // Responsive adjustments
     @media (max-width: 575px) {
@@ -569,41 +586,7 @@
 
 // Size guide button styling
 
-.size-guide-btn {
-  display: inline-flex;
 
-  align-items: center;
-
-  gap: 6px;
-
-  margin-left: 12px;
-
-  padding: 6px 12px;
-
-  background-color: #f8f9fa;
-
-  border: 1px solid #dee2e6;
-
-  border-radius: 20px;
-
-  color: #6c757d;
-
-  font-size: 12px;
-
-  cursor: pointer;
-
-  transition: all 0.3s ease;
-
-  &:hover {
-    background-color: #e9ecef;
-
-    color: #495057;
-  }
-
-  i {
-    font-size: 12px;
-  }
-}
 
 // Buy Now button styling
 

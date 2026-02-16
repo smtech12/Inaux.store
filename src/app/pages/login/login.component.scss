@@ -13,7 +13,7 @@
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
-    color: #848b8a;
+    color: #adb5bd;
     z-index: 10;
     display: flex;
     align-items: center;
@@ -22,7 +22,7 @@
     height: 20px;
 
     &:hover {
-      color: #bc8246;
+      color: #ffc959;
     }
 
     i {
@@ -30,4 +30,3 @@
     }
   }
 }
-

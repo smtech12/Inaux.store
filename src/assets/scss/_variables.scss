@@ -2,43 +2,42 @@
 $pop: 'Poppins', sans-serif;
 
 // Colors ---------------
-$white: #ffffff;
+$white: #121212; // Main background
 
-$black: #201f1f;
-$black-2: #323232;
-$black-3: #222222;
+$black: #ffffff; // Main text
+$black-2: #f8f9fa;
+$black-3: #e9ecef;
 
-$footer-bg: #151616;
+$footer-bg: #0a0a0a;
 
-$grey:#f5f5f5;
-$grey-2: #e1e1e1;
-$grey-3: #9d9d9d;
-$grey-4: #6666;
+$grey: #1e1e1e;
+$grey-2: #2c2c2c;
+$grey-3: #adb5bd;
+$grey-4: #444444;
 
 
-$theme-color: #bc8246;
+$theme-color: #ffc959; // Brand color
 $theme-2-color: #8a8f6a;
-$body-text-color: #848b8a;
+$body-text-color: #dee2e6;
 
 //border colors
-$border:#ebebeb;
-$border-2:#383838;
+$border: #333333;
+$border-2: #444444;
 
 
 
 // Heading Color
-$heading-color: #201f1f;
+$heading-color: #ffffff;
 
 // Soft color
-$black-soft:#444;
-$black-soft-2: #606060;
-$black-soft-3: #757575;
+$black-soft: #ced4da;
+$black-soft-2: #adb5bd;
+$black-soft-3: #8e9aaf;
 
 
 // Responsive Variables
 $laptop: 'only screen and (min-width: 1200px) and (max-width: 1600px)';
 $lg : 'only screen and (min-width: 992px) and (max-width: 1199px)';
-$md:'only screen and (min-width: 768px) and (max-width: 991px)';
+$md: 'only screen and (min-width: 768px) and (max-width: 991px)';
 $sm: 'only screen and (min-width: 576px) and (max-width: 767px)';
-$xs:'(max-width: 575px)';
-
+$xs: '(max-width: 575px)';

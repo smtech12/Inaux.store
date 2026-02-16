@@ -8,13 +8,9 @@
 
 .shop {
 
-  &__area {
+  &__area {}
 
-  }
-
-  &__sidebar {
-
-  }
+  &__sidebar {}
 
   &__header {
 
@@ -188,7 +184,7 @@
 
         text-align: left;
 
-        background: $white;
+        background: #1a1a1a;
 
         position: relative;
 
@@ -390,9 +386,9 @@
 
             text-align: center;
 
-            color: $black;
+            color: #dee2e6;
 
-            background: #f1f1f1;
+            background: #2c2c2c;
 
             @include border-radius(50%);
 
@@ -640,9 +636,7 @@
 
 .features {
 
-  &__product {
-
-  }
+  &__product {}
 
   &__product-wrapper {
 
@@ -728,9 +722,7 @@
 
   }
 
-  &__product-thumb {
-
-  }
+  &__product-thumb {}
 
   &__product-content {
 
@@ -1234,7 +1226,7 @@
 
       font-weight: 400;
 
-      color: #444;
+      color: $theme-color;
 
       margin-bottom: 3px;
 
@@ -1286,7 +1278,7 @@
 
         font-size: 14px;
 
-        color: $black;
+        color: $theme-color;
 
         &:hover a {
 
@@ -1844,7 +1836,7 @@
 
       }
 
-      .owl-carousel .owl-nav > div.disabled {
+      .owl-carousel .owl-nav>div.disabled {
 
         cursor: not-allowed;
 
@@ -1854,7 +1846,7 @@
 
       }
 
-      .owl-carousel:hover .owl-nav > div {
+      .owl-carousel:hover .owl-nav>div {
 
         opacity: 1;
 
@@ -1864,7 +1856,7 @@
 
       }
 
-      .owl-nav > div {
+      .owl-nav>div {
 
         position: absolute;
 
@@ -1916,7 +1908,7 @@
 
       }
 
-      .owl-nav > div:before {
+      .owl-nav>div:before {
 
         font-size: 20px;
 
@@ -2100,9 +2092,7 @@
 
   }
 
-  &-form {
-
-  }
+  &-form {}
 
   &-input {
 
@@ -2417,55 +2407,37 @@
 }
 
 .cart-plus-minus {
-
   position: relative;
-
   display: inline-block;
-
+  height: 50px;
+  width: 130px;
+  border: 1px solid $border;
+  background: $grey;
+  text-align: center;
+  border-radius: 5px;
 }
 
 .cart-plus-minus input {
-
   border: 0px;
-
+  height: 48px;
+  line-height: 48px;
   outline: 0px;
-
-  background: none;
-
-  font-weight: 400;
-
-  color: $black;
-
-  font-size: 14px;
-
-  display: inline-block;
-
-  height: 50px;
-
-  list-style: 45px;
-
-  padding: 0 20px;
-
-  width: 110px;
-
-  border: 1px solid #ebebeb;
-
+  background: transparent;
+  font-weight: 500;
+  color: $theme-color !important;
+  font-size: 16px;
+  width: 100%;
   text-align: center;
-
+  -webkit-text-fill-color: $theme-color !important;
+  opacity: 1 !important;
 }
 
 .cart-plus-minus .qtybutton {
-
   font-size: 20px;
-
-  color: $black;
-
+  color: $theme-color;
   display: inline-block;
-
   position: absolute;
-
-  top: 15px;
-
+  top: 13px;
   height: 22px;
 
   width: 22px;
@@ -2596,7 +2568,7 @@
 
 
 
-.product-quantity > input {
+.product-quantity>input {
 
   width: 80px;
 
@@ -2706,7 +2678,7 @@
 
 
 
-.cart-page-total > h2 {
+.cart-page-total>h2 {
 
   font-size: 25px;
 
@@ -2718,7 +2690,7 @@
 
 
 
-.cart-page-total > ul {
+.cart-page-total>ul {
 
   border: 1px solid #eaedff;
 
@@ -2726,7 +2698,7 @@
 
 
 
-.cart-page-total > ul > li {
+.cart-page-total>ul>li {
 
   list-style: none;
 
@@ -2744,7 +2716,7 @@
 
 
 
-.cart-page-total ul > li > span {
+.cart-page-total ul>li>span {
 
   float: right;
 
@@ -2928,7 +2900,7 @@ p.checkout-coupon input[type="submit"]:hover {
 
 
 
-.form-row > label {
+.form-row>label {
 
   margin-top: 15px;
 
@@ -3266,7 +3238,7 @@ p.checkout-coupon input[type="text"] {
 
 
 
-.panel-default > .panel-heading {
+.panel-default>.panel-heading {
 
   border-radius: 0;
 
@@ -3378,7 +3350,7 @@ p.checkout-coupon input[type="text"] {
 
 
 
-.panel-body > p {
+.panel-body>p {
 
   color: #222;
 
@@ -3458,7 +3430,7 @@ p.checkout-coupon input[type="text"] {
 
 
 
-.panel-title > a {
+.panel-title>a {
 
   display: block;
 
@@ -3751,4 +3723,3 @@ html .ui-button.ui-state-disabled:active {
   }
 
 }
-

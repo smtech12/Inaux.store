@@ -1,14 +1,13 @@
-
 .header__search-input {
   position: relative;
-  
+
   .search-results-dropdown {
     position: absolute;
     top: 100%;
     left: 0;
     width: 100%;
-    background: #fff;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    background: #1a1a1a;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     z-index: 99;
     border-radius: 0 0 5px 5px;
     max-height: 400px;
@@ -19,10 +18,10 @@
       list-style: none;
       padding: 0;
       margin: 0;
-      
+
       li {
         padding: 10px 15px;
-        border-bottom: 1px solid #eee;
+        border-bottom: 1px solid #333;
         cursor: pointer;
         transition: all 0.3s ease;
 
@@ -31,7 +30,7 @@
         }
 
         &:hover {
-          background-color: #f9f9f9;
+          background-color: #2c2c2c;
         }
 
         .search-item {
@@ -41,7 +40,7 @@
             width: 50px;
             height: 50px;
             flex-shrink: 0;
-            
+
             img {
               width: 100%;
               height: 100%;
@@ -57,7 +56,7 @@
               font-size: 14px;
               font-weight: 500;
               margin-bottom: 2px;
-              color: #333;
+              color: #ffffff;
               line-height: 1.2;
             }
 
@@ -65,14 +64,14 @@
               display: flex;
               gap: 10px;
               font-size: 12px;
-              
+
               .category {
-                color: #888;
+                color: #adb5bd;
                 font-style: italic;
               }
 
               .price {
-                color: #000;
+                color: #ffc959;
                 font-weight: 600;
               }
             }

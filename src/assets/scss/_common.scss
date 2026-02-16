@@ -4,12 +4,14 @@
 
 /* 1. Theme default css */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-*{
+
+* {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 }
- body {
+
+body {
 	font-family: $pop;
 	font-size: 14px;
 	font-weight: normal;
@@ -17,27 +19,37 @@
 	line-height: 24px;
 }
 
-.w-img{
-	& img{
+.w-img {
+	& img {
 		width: 100%;
 	}
 }
-.m-img{
-	& img{
+
+.m-img {
+	& img {
 		max-width: 100%;
 	}
 }
-@media (min-width: 1200px){
- .container, .container-lg, .container-md, .container-sm, .container-xl {
-    max-width: 1140px;
- }
+
+@media (min-width: 1200px) {
+
+	.container,
+	.container-lg,
+	.container-md,
+	.container-sm,
+	.container-xl {
+		max-width: 1140px;
+	}
 }
-.cursor-pointer{
-  cursor: pointer;
+
+.cursor-pointer {
+	cursor: pointer;
 }
-.p-relative{
-  position: relative;
+
+.p-relative {
+	position: relative;
 }
+
 a,
 .btn,
 button,
@@ -60,39 +72,51 @@ h5,
 h6 {
 	@include transition(.3s);
 }
+
 a:focus,
 .button:focus {
 	text-decoration: none;
 	outline: none;
 }
-a{
-  text-decoration: none;
+
+a {
+	text-decoration: none;
 }
-.z-index-1{
-  z-index: 1;
+
+.z-index-1 {
+	z-index: 1;
 }
+
 a:focus,
-a:hover
-{
+a:hover {
 	color: inherit;
 	text-decoration: none;
 }
+
 a,
 button {
 	color: inherit;
 	outline: none;
 	border: none;
 }
-button:hover{
+
+button:hover {
 	cursor: pointer;
 }
-button:focus{outline: 0; border:0}
+
+button:focus {
+	outline: 0;
+	border: 0
+}
+
 .uppercase {
 	text-transform: uppercase;
 }
+
 .capitalize {
 	text-transform: capitalize;
 }
+
 h1,
 h2,
 h3,
@@ -110,28 +134,36 @@ h6 {
 h1 {
 	font-size: 40px;
 }
+
 h2 {
 	font-size: 36px;
 }
+
 h3 {
 	font-size: 27px;
 }
+
 h4 {
 	font-size: 20px;
 }
+
 h5 {
 	font-size: 16px;
 }
+
 h6 {
 	font-size: 14px;
 }
+
 ul {
 	margin: 0px;
 	padding: 0px;
 }
+
 li {
 	list-style: none;
 }
+
 p {
 	font-family: $pop;
 	font-size: 14px;
@@ -146,11 +178,13 @@ p {
 	color: $white;
 	text-shadow: none;
 }
+
 ::-moz-selection {
 	background: $theme-color;
-	color:$white;
+	color: $white;
 	text-shadow: none;
 }
+
 ::selection {
 	background: $theme-color;
 	color: $white;
@@ -165,6 +199,7 @@ p {
 	font-size: 14px;
 	opacity: 1;
 }
+
 *::placeholder {
 	color: $black;
 	font-size: 14px;
@@ -176,25 +211,29 @@ p {
     - Common Classes
 -----------------------------------------*/
 .fix {
-    overflow:hidden
+	overflow: hidden
 }
-.clear{
-    clear: both;
+
+.clear {
+	clear: both;
 }
 
 .f-left {
 	float: left
 }
+
 .f-right {
 	float: right
 }
 
-.p-relative{
+.p-relative {
 	position: relative;
 }
-.p-absolute{
+
+.p-absolute {
 	position: absolute;
 }
+
 /*--
     - Background color
 -----------------------------------------*/
@@ -205,9 +244,11 @@ p {
 .theme-bg {
 	background: $theme-color;
 }
+
 .white-bg {
-	background:$white;
+	background: $white;
 }
+
 .black-bg {
 	background: $black;
 }
@@ -218,7 +259,7 @@ p {
 
 
 .dark-soft-bg {
-	background: #282828;
+	background: #1e1e1e;
 }
 
 /*--
@@ -235,19 +276,21 @@ p {
 .text-white span,
 .text-white li,
 .text-white a {
-	color: $white !important;
+	color: $black !important;
 }
 
 .white-color {
-	color: $white;
+	color: $black;
 }
 
 .theme-color {
 	color: $theme-color !important;
 }
+
 .black-color {
 	color: $black;
 }
+
 // .primary-color {
 // 	color: #222;
 // }
@@ -257,104 +300,119 @@ p {
 
 /* spacing */
 
-.mb-265{
+.mb-265 {
 	margin-bottom: 265px;
 }
 
-.mt--95{
+.mt--95 {
 	margin-top: -95px;
 }
 
 /* padding */
 
-.pl-250{
+.pl-250 {
 	padding-left: 250px;
-	@media #{$laptop}{
+
+	@media #{$laptop} {
 		padding-left: 50px;
 	}
-	@media #{$lg}{
+
+	@media #{$lg} {
 		padding-left: 25px;
 	}
-	@media #{$md}{
+
+	@media #{$md} {
 		padding-left: 25px;
 	}
-	@media #{$sm}{
+
+	@media #{$sm} {
 		padding-left: 25px;
 	}
-	@media #{$xs}{
+
+	@media #{$xs} {
 		padding-left: 10px;
 	}
 }
 
 /* box spacing */
 
-.box-25{
+.box-25 {
 	padding-left: 25px;
 	padding-right: 25px;
-	@media #{$sm}{
+
+	@media #{$sm} {
 		padding-left: 15px;
 		padding-right: 15px;
 	}
-	@media #{$xs}{
+
+	@media #{$xs} {
 		padding-left: 0px;
 		padding-right: 0px;
 	}
 }
 
-.box-m-15{
+.box-m-15 {
 	margin-left: 15px;
 	margin-right: 15px;
-	@media #{$sm}{
+
+	@media #{$sm} {
 		margin-left: 15px;
 		margin-right: 15px;
 	}
-	@media #{$xs}{
+
+	@media #{$xs} {
 		margin-left: 15px;
 		margin-right: 15px;
 	}
 }
 
-.box-white{
-	@media #{$xs}{
+.box-white {
+	@media #{$xs} {
 		padding-top: 0;
 	}
 }
 
-.box-white-inner{
+.box-white-inner {
 	position: relative;
-	&::before{
+
+	&::before {
 		position: absolute;
 		content: "";
 		top: -50px;
 		left: -50px;
 		width: calc(100% + 100px);
 		height: calc(100% + 30px);
-		background: #ffffff;
-		@media #{$laptop}{
+		background: #1a1a1a;
+
+		@media #{$laptop} {
 			top: -15px;
 			left: -15px;
 			width: calc(100% + 30px);
 			height: calc(100% + 30px);
 		}
-		@media #{$lg}{
+
+		@media #{$lg} {
 			top: -30px;
 			left: -30px;
 			width: calc(100% + 60px);
 			height: calc(100% + 60px);
 		}
-		@media #{$md}{
+
+		@media #{$md} {
 			top: -40px;
 			left: -35px;
 			width: calc(100% + 70px);
 			height: calc(100% + 80px);
 		}
-		@media #{$sm}{
+
+		@media #{$sm} {
 			top: -20px;
 			left: -20px;
 			width: calc(100% + 40px);
 			height: calc(100% + 40px);
 		}
-		@media #{$xs}{
+
+		@media #{$xs} {
 			top: -15px;
 			left: -15px;
 			width: calc(100% + 30px);
@@ -364,12 +422,14 @@ p {
 }
 
 
-.box-pb-40{
+.box-pb-40 {
 	padding-bottom: 40px;
-	@media #{$sm}{
+
+	@media #{$sm} {
 		padding-bottom: 30px;
 	}
-	@media #{$xs}{
+
+	@media #{$xs} {
 		padding-bottom: 15px;
 	}
 }
@@ -377,35 +437,43 @@ p {
 
 
 /* custom container*/
-.custom-container{
+.custom-container {
 	padding-left: 0;
 	padding-right: 0;
 }
-.custom-container-2{
+
+.custom-container-2 {
 	@media (min-width:1400px) {
 		max-width: 1220px;
 	}
 }
+
 /* btn */
 
-.os-btn{
+.os-btn {
 	position: relative;
-	display: inline-block;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
 	text-transform: uppercase;
 	text-align: center;
 	font-weight: 600;
 	height: 50px;
-	line-height: 46px;
+	line-height: 1;
 	padding: 0 42px;
-	border: 2px solid $border;
-	color: $black-2;
+	border: 2px solid $theme-color;
+	color: $theme-color;
 	background: transparent;
 	z-index: 1;
 	font-size: 12px;
-	& span{
-		color: $theme-color;
+	transition: all 0.3s ease;
+	border-radius: 5px;
+
+	& span {
+		color: inherit;
 	}
-	&::after{
+
+	&::after {
 		position: absolute;
 		content: '';
 		top: 0;
@@ -414,52 +482,71 @@ p {
 		height: 0;
 		background-color: $theme-color;
 		z-index: -1;
+		transition: all 0.3s ease;
 	}
-	&:hover{
-		color: $white;
+
+	&:hover {
+		color: #000;
 		border-color: $theme-color;
-		&::after{
+
+		&::after {
 			height: 100%;
 		}
-		& span{
-			color: $white;
+
+		& span {
+			color: #000;
 		}
 	}
-	&-2{
-		border-color: $black-2;
+
+	&-2 {
+		border-color: $theme-color;
 	}
-	&-3{
+
+	&-3 {
 		padding: 0 77px;
 	}
-	&-4{
-		&::after{
-			background: #666;
+
+	&-4 {
+		&::after {
+			background: $theme-color;
 		}
 	}
-	&-black{
-		color: $white;
-		background-color: $black-2;
-		border-color: $black-2;
-		&::after{
-			background-color: $theme-color;
+
+	&-black {
+		color: #000;
+		background-color: $theme-color;
+		border-color: $theme-color;
+
+		&::after {
+			background-color: #000;
 		}
-		&:hover{
+
+		&:hover {
+			color: $theme-color;
 			border-color: $theme-color;
+
+			& span {
+				color: $theme-color;
+			}
 		}
 	}
-	&-white{
-		color: $white;
-		border-color: $white;
-		&:hover{
-			color: $black-2;
-			border-color: $white;
-			&::after{
-				background: $white;
+
+	&-white {
+		color: $black;
+		border-color: $black;
+
+		&:hover {
+			color: #121212;
+			border-color: $black;
+
+			&::after {
+				background: $black;
 			}
 		}
 	}
 }
-.os-btn-4{
+
+.os-btn-4 {
 	position: relative;
 	display: inline-block;
 	text-transform: uppercase;
@@ -473,10 +560,12 @@ p {
 	background: transparent;
 	z-index: 1;
 	font-size: 12px;
-	& span{
+
+	& span {
 		color: $theme-color;
 	}
-	&::after{
+
+	&::after {
 		position: absolute;
 		content: '';
 		top: 0;
@@ -486,18 +575,22 @@ p {
 		background-color: $theme-2-color;
 		z-index: -1;
 	}
-	&:hover{
+
+	&:hover {
 		color: $white;
 		border-color: $theme-2-color;
-		&::after{
+
+		&::after {
 			height: 100%;
 		}
-		& span{
+
+		& span {
 			color: $white;
 		}
 	}
 }
-.os-btn-5{
+
+.os-btn-5 {
 	position: relative;
 	display: inline-block;
 	text-transform: uppercase;
@@ -511,10 +604,12 @@ p {
 	background: transparent;
 	z-index: 1;
 	font-size: 12px;
-	& span{
+
+	& span {
 		color: $theme-color;
 	}
-	&::after{
+
+	&::after {
 		position: absolute;
 		content: '';
 		top: 0;
@@ -524,43 +619,51 @@ p {
 		background-color: $theme-2-color;
 		z-index: -1;
 	}
-	&:hover{
+
+	&:hover {
 		color: $white;
 		border-color: $theme-2-color;
-		&::after{
+
+		&::after {
 			height: 100%;
 		}
-		& span{
+
+		& span {
 			color: $white;
 		}
 	}
 }
-.link-btn{
+
+.link-btn {
 	font-size: 12px;
 	color: $black-soft;
 	text-transform: capitalize;
 	font-weight: 500;
-	&:hover{
+
+	&:hover {
 		color: $theme-color;
 	}
 }
-.action-btn{
+
+.action-btn {
 	background: $black;
 	color: $white;
 	font-size: 14px;
 	padding: 15px 31.9px;
 	transition: .3s;
-	&:hover{
+
+	&:hover {
 		background: $theme-2-color;
 		color: $white;
 	}
 }
 
 /* section title */
-.section{
-	&__title{
+.section {
+	&__title {
 		position: relative;
-		&::after{
+
+		&::after {
 			border-top: 1px solid $border;
 			content: "";
 			left: 0;
@@ -569,44 +672,54 @@ p {
 			top: 50%;
 			width: 100%;
 		}
-		& h2{
+
+		& h2 {
 			display: inline-block;
 			font-weight: 400;
 			position: relative;
-			background: #fff none repeat scroll 0 0;
+			background: #121212 none repeat scroll 0 0;
 			padding: 0 50px;
 			z-index: 1;
-			@media #{$xs}{
+
+			@media #{$xs} {
 				font-size: 30px;
 				padding: 0 15px;
 			}
 		}
-		& p{
+
+		& p {
 			color: $black-soft-2;
 			margin-bottom: 0;
 		}
-		&-2{
+
+		&-2 {
 			padding-left: 130px;
 			padding-right: 130px;
 			font-size: 24px;
 			text-transform: uppercase;
 			color: $black;
 			font-weight: 700;
+
 			@media #{$sm,$xs} {
 				font-size: 20px;
 			}
+
 			@media #{$xs} {
 				padding-right: 0;
 				padding-left: 0;
 			}
-			& span{
+
+			& span {
 				padding: 0 70px;
 				display: inline-block;
 				position: relative;
+
 				@media #{$sm,$xs} {
 					padding: 0 30px;
 				}
-				&::before,&::after{
+
+				&::before,
+				&::after {
 					width: 130px;
 					height: 4px;
 					background: transparent;
@@ -615,21 +728,25 @@ p {
 					top: 13px;
 					border-top: 1px solid #ebebeb;
 					border-bottom: 1px solid #ebebeb;
+
 					@media #{$xs} {
 						display: none;
 					}
 				}
-				&::before{
+
+				&::before {
 					right: 100%;
 				}
-				&::after{
+
+				&::after {
 					left: 100%;
 				}
 			}
 		}
 	}
-	&__wrapper{
-		& .sub-title{
+
+	&__wrapper {
+		& .sub-title {
 			margin: 0 auto 10px;
 			max-width: 600px;
 		}
@@ -639,50 +756,60 @@ p {
 
 /* page title area */
 
-.page{
-	&__title{
+.page {
+	&__title {
 		height: 530px;
 		@include background();
-		@media #{$sm}{
+
+		@media #{$sm} {
 			height: 400px;
 		}
-		@media #{$xs}{
+
+		@media #{$xs} {
 			height: 350px;
 		}
-		&-inner{
-			& h1{
+
+		&-inner {
+			& h1 {
 				font-size: 36px;
 				color: $black-2;
 				text-transform: capitalize;
 				margin-bottom: 25px;
 			}
-			@media #{$sm}{
+
+			@media #{$sm} {
 				margin-top: 100px;
 			}
-			@media #{$xs}{
+
+			@media #{$xs} {
 				margin-top: 100px;
 			}
 		}
-		&-breadcrumb{
-			& .breadcrumb{
+
+		&-breadcrumb {
+			& .breadcrumb {
 				background: transparent;
 				padding: 0;
 				margin-bottom: 0;
 				@include border-radius(0);
 			}
-			& .breadcrumb-item{
+
+			& .breadcrumb-item {
 				font-size: 12px;
 				text-transform: capitalize;
 				color: $black-soft;
 				font-weight: 500;
-				& a{
-					&:hover{
+
+				& a {
+					&:hover {
 						color: $theme-color;
 					}
 				}
-				&.active{
+
+				&.active {
 					color: $black-2;
-					&::before{
+
+					&::before {
 						color: $black-soft;
 					}
 				}
@@ -694,34 +821,39 @@ p {
 
 /* rating */
 
-.rating{
-    & ul{
-        & li{
-            display: inline-block;
-            & span{
-                font-size: 10px;
-                color: $theme-color;
-            }
-        }
-	}
-	&.rating-shop{
-		& ul{
+.rating {
+	& ul {
+		& li {
 			display: inline-block;
-			& li{
-				& span{
+
+			& span {
+				font-size: 10px;
+				color: $theme-color;
+			}
+		}
+	}
+
+	&.rating-shop {
+		& ul {
+			display: inline-block;
+
+			& li {
+				& span {
 					font-size: 12px;
 					color: $theme-color;
 				}
 			}
 		}
-		& span{
+
+		& span {
 			font-size: 12px;
 			font-weight: 500;
 		}
-		&-2{
-			& ul{
-				& li{
-					& span{
+
+		&-2 {
+			& ul {
+				& li {
+					& span {
 						color: $theme-2-color;
 					}
 				}
@@ -730,11 +862,12 @@ p {
 	}
 }
 
-.rating-left{
+.rating-left {
 	position: relative;
 	padding-left: 25px;
 	margin-left: 25px;
-	&::after{
+
+	&::after {
 		position: absolute;
 		content: '';
 		left: 0;
@@ -744,8 +877,9 @@ p {
 		width: 1px;
 		background: #dcdcdc;
 	}
-	& a{
-		&:hover{
+
+	& a {
+		&:hover {
 			color: $theme-color;
 		}
 	}
@@ -761,53 +895,61 @@ p {
 	line-height: 40px;
 	text-align: center;
 	font-size: 15px;
-	color:  $white;
+	color: $white;
 	list-style-type: none;
 	background: $theme-color;
 	margin-right: 20px;
-	border: 1px solid  $theme-color;
+	border: 1px solid $theme-color;
 	z-index: 999;
 }
-#scroll .scroll-link{
-	border: 1px solid  $theme-2-color;
+
+#scroll .scroll-link {
+	border: 1px solid $theme-2-color;
 	background: $theme-2-color;
 }
 
 /* border bottom 1*/
 
-.border-top-1{
+.border-top-1 {
 	border-top: 1px solid $border;
 }
 
 
 /* sidebar */
 
-.sidebar{
-	&__wrapper{
-		@media #{$md}{
+.sidebar {
+	&__wrapper {
+		@media #{$md} {
 			margin-top: 50px;
 		}
-		@media #{$sm}{
+
+		@media #{$sm} {
 			margin-top: 50px;
 		}
-		@media #{$xs}{
+
+		@media #{$xs} {
 			margin-top: 50px;
 		}
 	}
-	&__widget{}
-    &__widget-title{
-        & h3{
-            font-size: 20px;
-            margin-bottom: 0;
-        }
+
+	&__widget {}
+
+	&__widget-title {
+		& h3 {
+			font-size: 20px;
+			margin-bottom: 0;
+		}
 	}
-	&__links{
-		& ul{
-			& li{
+
+	&__links {
+		& ul {
+			& li {
 				margin-bottom: 8px;
-				& a{
+
+				& a {
 					color: $black-soft;
-					&:hover{
+
+					&:hover {
 						color: $black-2;
 					}
 				}
@@ -820,20 +962,24 @@ p {
 /* basic page navigation */
 
 .basic-pagination {
-	& ul{
+	& ul {
 		display: block;
-    & .disabled{
-      display: none;
-    }
-		& li{
+
+		& .disabled {
+			display: none;
+		}
+
+		& li {
 			display: inline-block;
 			margin: 0 5px;
-			&.active{
-				& a{
+
+			&.active {
+				& a {
 					border-color: $black;
 				}
 			}
-			& a{
+
+			& a {
 				height: 35px;
 				width: 35px;
 				background: transparent;
@@ -845,7 +991,8 @@ p {
 				display: inline-block;
 				text-align: center;
 				border: 2px solid $border;
-				&:hover{
+
+				&:hover {
 					border-color: $black;
 				}
 			}
@@ -858,55 +1005,70 @@ p {
 .effectThree a {
 	display: block;
 	overflow: hidden;
-	position: relative; }
-	.effectThree a img {
-	  -webkit-transform: scale(1);
-	  -ms-transform: scale(1);
-	  -o-transform: scale(1);
-	  transform: scale(1);
-	  -webkit-transition: all 0.35s ease 0s;
-	  -o-transition: all 0.35s ease 0s;
-	  transition: all 0.35s ease 0s; }
-	.effectThree a:before, .effectThree a:after {
-	  content: "";
-	  opacity: 0;
-	  filter: alpha(opacity=0);
-	  position: absolute;
-	  -webkit-transition: all 0.35s ease 0s;
-	  -o-transition: all 0.35s ease 0s;
-	  transition: all 0.35s ease 0s;
-	  z-index: 1; }
-	.effectThree a:before {
-	  border-bottom: 1px solid #ffffff;
-	  border-top: 1px solid #ffffff;
-	  bottom: 20px;
-	  left: 10px;
-	  right: 10px;
-	  top: 20px;
-	  -webkit-transform: scale(1, 0);
-	  -ms-transform: scale(1, 0);
-	  -o-transform: scale(1, 0);
-	  transform: scale(1, 0); }
-	.effectThree a:after {
-	  border-left: 1px solid #ffffff;
-	  border-right: 1px solid #ffffff;
-	  left: 20px;
-	  right: 20px;
-	  bottom: 10px;
-	  top: 10px;
-	  -webkit-transform: scale(0, 1);
-	  -ms-transform: scale(0, 1);
-	  -o-transform: scale(0, 1);
-	  transform: scale(0, 1); }
-	.effectThree a:hover:before, .effectThree a:hover:after {
-	  opacity: 1;
-	  filter: alpha(opacity=100);
-	  -webkit-transform: scale(1);
-	  -ms-transform: scale(1);
-	  -o-transform: scale(1);
-	  transform: scale(1); }
-	.effectThree a:hover img {
-	  -webkit-transform: scale(1.05);
-	  -ms-transform: scale(1.05);
-	  -o-transform: scale(1.05);
-	  transform: scale(1.05); }
+	position: relative;
+}
+
+.effectThree a img {
+	-webkit-transform: scale(1);
+	-ms-transform: scale(1);
+	-o-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: all 0.35s ease 0s;
+	-o-transition: all 0.35s ease 0s;
+	transition: all 0.35s ease 0s;
+}
+
+.effectThree a:before,
+.effectThree a:after {
+	content: "";
+	opacity: 0;
+	filter: alpha(opacity=0);
+	position: absolute;
+	-webkit-transition: all 0.35s ease 0s;
+	-o-transition: all 0.35s ease 0s;
+	transition: all 0.35s ease 0s;
+	z-index: 1;
+}
+
+.effectThree a:before {
+	border-bottom: 1px solid #ffffff;
+	border-top: 1px solid #ffffff;
+	bottom: 20px;
+	left: 10px;
+	right: 10px;
+	top: 20px;
+	-webkit-transform: scale(1, 0);
+	-ms-transform: scale(1, 0);
+	-o-transform: scale(1, 0);
+	transform: scale(1, 0);
+}
+
+.effectThree a:after {
+	border-left: 1px solid #ffffff;
+	border-right: 1px solid #ffffff;
+	left: 20px;
+	right: 20px;
+	bottom: 10px;
+	top: 10px;
+	-webkit-transform: scale(0, 1);
+	-ms-transform: scale(0, 1);
+	-o-transform: scale(0, 1);
+	transform: scale(0, 1);
+}
+
+.effectThree a:hover:before,
+.effectThree a:hover:after {
+	opacity: 1;
+	filter: alpha(opacity=100);
+	-webkit-transform: scale(1);
+	-ms-transform: scale(1);
+	-o-transform: scale(1);
+	transform: scale(1);
+}
+
+.effectThree a:hover img {
+	-webkit-transform: scale(1.05);
+	-ms-transform: scale(1.05);
+	-o-transform: scale(1.05);
+	transform: scale(1.05);
+}
