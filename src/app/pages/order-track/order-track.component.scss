@@ -426,16 +426,22 @@
         .track-form-box {
           .input-group {
             flex-direction: column;
-            border-radius: 10px;
+            border-radius: 12px;
+            box-shadow: none;
 
             .form-control {
-              border-radius: 10px 10px 0 0;
-              border: 1px solid #e9ecef;
-              margin-bottom: 10px;
+              border-radius: 8px;
+              border: 1px solid #444;
+              margin-bottom: 15px;
+              width: 100%;
+              padding: 12px 20px;
             }
 
             .track-btn {
-              border-radius: 0 0 10px 10px;
+              border-radius: 8px;
+              width: 100%;
+              padding: 12px 20px;
+              min-width: auto;
             }
           }
         }
@@ -458,31 +464,110 @@
       .order-details-header {
         flex-direction: column;
         align-items: flex-start;
-        gap: 15px;
+        gap: 10px;
+
+        h3 {
+          font-size: 20px;
+        }
       }
 
       .order-info-card,
       .order-items-card,
       .tracking-timeline-card {
         padding: 20px 15px;
+        margin-bottom: 20px;
+
+        h4 {
+          font-size: 18px;
+          margin-bottom: 20px;
+        }
+
+        .info-group {
+          margin-bottom: 15px;
+
+          h6 {
+            font-size: 13px;
+          }
+
+          p {
+            font-size: 14px;
+
+            &.order-total {
+              font-size: 16px;
+            }
+          }
+        }
 
         .order-item {
           flex-direction: column;
           text-align: center;
+          padding: 20px 0;
 
           .item-image {
+            width: 100px;
+            height: 100px;
             margin-right: 0;
             margin-bottom: 15px;
+            margin-left: auto;
+            margin-right: auto;
+          }
+
+          .item-details {
+            h6 {
+              font-size: 15px;
+            }
+
+            p {
+              font-size: 13px;
+            }
+
+            .discount-info {
+              justify-content: center;
+              flex-wrap: wrap;
+            }
           }
 
           .item-price {
             text-align: center;
-            margin-top: 10px;
+            margin-top: 15px;
+
+            p {
+              font-size: 15px;
+            }
           }
         }
 
         .timeline {
-          padding-left: 20px;
+          padding-left: 15px;
+
+          &::before {
+            left: 5px;
+          }
+
+          .timeline-item {
+            .timeline-dot {
+              left: -20px;
+              width: 16px;
+              height: 16px;
+              top: 4px;
+            }
+
+            .timeline-content {
+              .timeline-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+
+                h6 {
+                  font-size: 14px;
+                }
+
+                .timeline-date {
+                  font-size: 12px;
+                }
+              }
+            }
+          }
         }
       }
     }
