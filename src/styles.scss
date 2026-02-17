@@ -183,7 +183,9 @@ TICKER BAR
 }
 
 .brand-logo {
-    height: auto !important;
+    width: 140px !important;
+    height: 65.59px !important;
+    object-fit: contain !important;
 }
 
 .main-menu ul li a {
@@ -393,8 +395,8 @@ a.os-btn.os-btn-2,
 }
 
 .header__area.sticky .brand-logo {
-    height: 50px !important;
-    width: 106px !important;
+    width: 140px !important;
+    height: 65.59px !important;
 }
 
 .page__title {
@@ -668,6 +670,14 @@ span.help-txt a {
     text-transform: capitalize;
     font-size: 21px;
     font-weight: 500;
+}
+
+.footer__widget-title {
+    img {
+        width: 143px !important;
+        height: 67px !important;
+        object-fit: contain !important;
+    }
 }
 
 .footer__social ul li {

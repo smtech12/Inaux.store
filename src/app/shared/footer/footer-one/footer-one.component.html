@@ -13,8 +13,8 @@
               <!-- <p *ngIf="storeName">{{storeName}}</p> -->
               <!-- <p *ngIf="!storeName"></p> -->
               <p>Haala is a premium e-commerce brand offering refined headwear and exquisite fragrances.
-Crafted for those who appreciate timeless elegance and quality.</p>
-              
+                Crafted for those who appreciate timeless elegance and quality.</p>
+
               <span class="footer-shipping">
                 <img src="./assets/img/iconseye-copy-1-1.webp" class="img-fluid" alt="Shipping" />
 
@@ -60,13 +60,14 @@ Crafted for those who appreciate timeless elegance and quality.</p>
               <h5>Get In touch</h5>
             </div>
             <div class="footer__widget-content">
-             <span class="help-link">
-                <i class="cal-icon"><img class="img-fluid animated infinite tada" src="./assets/img/headphones-2.webp" /></i>
+              <span class="help-link">
+                <i class="cal-icon"><img class="img-fluid animated infinite tada"
+                    src="./assets/img/headphones-2.webp" /></i>
                 <span class="help-txt">
                   <p>Need Help?</p>
-                  <a href="tel:+923212482592">0321-248-2592</a>
+                  <a [href]="'tel:' + contactPhone">{{contactPhone}}</a>
                 </span>
-             </span>
+              </span>
               <div class="footer__contact mt-4">
                 <ul>
                   <li>
@@ -74,7 +75,7 @@ Crafted for those who appreciate timeless elegance and quality.</p>
                       <i class="fal fa-map-marker-alt"></i>
                     </div>
                     <div class="text">
-                      <span>Add: Salman Tower Malir 15</span>
+                      <span>{{contactAddress}}</span>
                     </div>
                   </li>
                   <li>
@@ -82,7 +83,7 @@ Crafted for those who appreciate timeless elegance and quality.</p>
                       <i class="fal fa-envelope-open-text"></i>
                     </div>
                     <div class="text">
-                      <span>Email: saqib_azim&#64;yahoo.com</span>
+                      <span>{{contactEmail}}</span>
                     </div>
                   </li>
                   <li>
@@ -90,7 +91,7 @@ Crafted for those who appreciate timeless elegance and quality.</p>
                       <i class="fal fa-phone-alt"></i>
                     </div>
                     <div class="text">
-                      <span>Phone Number: 03212482592</span>
+                      <span>Phone Number: {{contactPhone}}</span>
                     </div>
                   </li>
                 </ul>

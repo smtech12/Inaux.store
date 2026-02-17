@@ -46,12 +46,12 @@ export class FooterOneComponent implements OnInit {
               ? `Email: ${data.tenantHeader.contactEmail}`
               : this.contactEmail;
             this.contactPhone = data.tenantHeader.contactPhone
-              ? `Phone Number: ${data.tenantHeader.contactPhone}`
+              ? `${data.tenantHeader.contactPhone}`
               : this.contactPhone;
             this.storeName = data.tenantHeader.storeName || this.storeName;
 
-            // Use default Haala logo - don't use API logo, always use default
-            this.logoUrl = '/assets/img/logo/Haala.png';
+            // Use logo from API
+            this.logoUrl = data.tenantHeader.logo || '/assets/img/logo/Haala.png';
 
             // Set visitor count
             this.visitorCount = data.tenantHeader.vistourCount || 0;
