@@ -1,9 +1,6 @@
-<section
-  class="page__title p-relative d-flex align-items-center"
-  [style.background-image]="backgroundImage ? 'url(' + backgroundImage + ')' : 'none'"
-  [class.clickable]="redirectUrl"
-  (click)="onBannerClick()"
->
+<section class="page__title p-relative d-flex align-items-center"
+  [style.background-image]="backgroundImage ? 'url(\'' + backgroundImage + '\')' : 'none'"
+  [class.clickable]="redirectUrl" (click)="onBannerClick()">
   <div class="container">
     <div class="row">
       <div class="col-xl-12">

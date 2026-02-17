@@ -92,7 +92,7 @@ export class HomeTwoComponent implements OnInit {
    * Load banner data from WebSection API
    */
   private loadBannerData(): void {
-    this.productService.getSectionItemsByName('Banner').subscribe({
+    this.productService.getSectionItemsByName('Offer').subscribe({
       next: (items) => {
         if (items && items.length > 0) {
           const bannerItem = items[0];

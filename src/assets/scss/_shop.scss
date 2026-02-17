@@ -1639,9 +1639,10 @@
         & .product__banner-img {
 
           & img {
-
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
             @include transform(scale(1.1));
-
           }
 
         }

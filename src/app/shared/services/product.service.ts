@@ -512,7 +512,10 @@ export class ProductService {
    * Get all web sections from API (cached to avoid duplicate calls)
    * @returns Observable of WebSectionDto array
    */
-  public getAllSections(): Observable<WebSectionDto[]> {
+  public getAllSections(forceRefresh: boolean = false): Observable<WebSectionDto[]> {
+    if (forceRefresh) {
+      this.webSectionsCache$ = null;
+    }
     // Return cached Observable if it exists, otherwise create and cache it
     if (!this.webSectionsCache$) {
       this.webSectionsCache$ = this.http.get<ApiResponseMessage<GetSectionResponseDto>>(`${this.baseUrl}/get-section`)
@@ -522,7 +525,7 @@ export class ProductService {
             if (response && response.successData && response.successData.sections && Array.isArray(response.successData.sections) && response.successData.sections.length > 0) {
               // Filter only active sections
               const activeSections = response.successData.sections.filter(section => section.isActive);
-              console.log('Active Web Sections:', activeSections);
+              console.log('Active Web Sections:', activeSections.map(s => s.sectionName));
               return activeSections;
             }
             console.warn('No web sections in response or empty array');
@@ -692,13 +695,14 @@ export class ProductService {
    * @param sectionName The name of the section to retrieve
    * @returns Observable of WebSectionItemDto array
    */
-  public getSectionItemsByName(sectionName: string): Observable<WebSectionItemDto[]> {
-    return this.getAllSections().pipe(
+  public getSectionItemsByName(sectionName: string, forceRefresh: boolean = false): Observable<WebSectionItemDto[]> {
+    return this.getAllSections(forceRefresh).pipe(
       map(sections => {
-        // Find section by sectionName (case-insensitive)
+        // Find section by sectionName (case-insensitive and trimmed)
         const targetSection = sections.find(section => {
-          const sectionNameLower = section.sectionName?.toLowerCase() || '';
-          return sectionNameLower === sectionName.toLowerCase();
+          const sectionNameLower = (section.sectionName || '').trim().toLowerCase();
+          const targetName = (sectionName || '').trim().toLowerCase();
+          return sectionNameLower === targetName;
         });
 
         if (targetSection && targetSection.items && targetSection.items.length > 0) {
@@ -782,7 +786,7 @@ export class ProductService {
    */
   trackOrder(transactionNumber: string): Observable<ApiResponseMessage<OrderTrackResponse>> {
     const params = new HttpParams().set('transactionNumber', transactionNumber);
-    
+
     return this.http.get<ApiResponseMessage<OrderTrackResponse>>(
       `${this.baseUrl}/order-track`,
       { params }
