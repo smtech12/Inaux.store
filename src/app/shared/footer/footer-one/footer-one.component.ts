@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import social_links, { ISocial } from '../../data/social-data';
 import { TenantService } from '../../services/tenant.service';
+import { ProductService } from '../../services/product.service';
 import { TenantHeaderInfoDTO } from '../../types/tenant-header-model';
 
 @Component({
@@ -20,11 +21,16 @@ export class FooterOneComponent implements OnInit {
   public storeName: string = '';
   public logoUrl: string = '/assets/img/logo/Haala.png';
   public visitorCount: number = 0;
+  public companyDescription: string = 'Haala is a premium e-commerce brand offering refined headwear and exquisite fragrances. Crafted for those who appreciate timeless elegance and quality.';
 
-  constructor(private tenantService: TenantService) { }
+  constructor(
+    private tenantService: TenantService,
+    private productService: ProductService
+  ) { }
 
   ngOnInit() {
     this.loadTenantHeaderInfo();
+    this.loadCompanyDescription();
   }
 
   /**
@@ -61,6 +67,25 @@ export class FooterOneComponent implements OnInit {
       error: (error) => {
         console.error('Error loading tenant header info:', error);
         // Keep default values on error
+      }
+    });
+  }
+
+  /**
+   * Load company description from web sections API
+   */
+  private loadCompanyDescription() {
+    this.productService.getSectionItemsByName('Company Description').subscribe({
+      next: (items) => {
+        if (items && items.length > 0) {
+          const item = items[0];
+          // Combine title and subtitle to show description
+          // For example: "INAUX is a contemporary jewelry brand..."
+          this.companyDescription = `${item.title} ${item.subtitle}`.trim();
+        }
+      },
+      error: (error) => {
+        console.error('Error loading company description:', error);
       }
     });
   }
