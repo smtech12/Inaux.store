@@ -636,9 +636,29 @@ export class ProductService {
 
   /**
    * Get top featured/selling products from API
+   * @param categoryId Optional category ID to filter featured products
    * @returns Observable of IProduct array (top 5 featured products)
    */
-  public getTopFeaturedProducts(): Observable<IProduct[]> {
+  public getTopFeaturedProducts(categoryId: number | null = null): Observable<IProduct[]> {
+    // If categoryId is provided, fetch directly without using the global cache
+    if (categoryId && categoryId > 0) {
+      const params = new HttpParams().set('categoryId', categoryId.toString());
+      return this.http.get<ApiResponseMessage<any[]>>(`${this.baseUrl}/get-top-featured-product`, { params })
+        .pipe(
+          map(response => {
+            if (response && response.successData && Array.isArray(response.successData) && response.successData.length > 0) {
+              return response.successData.map(product => this.mapFeaturedProductToIProduct(product));
+            }
+            return [];
+          }),
+          catchError(error => {
+            console.error('Error fetching top featured products from API:', error);
+            return of([]);
+          })
+        );
+    }
+
+    // Default behavior (no category): use cache
     if (!this.topFeaturedProductsCache$) {
       this.topFeaturedProductsCache$ = this.http.get<ApiResponseMessage<any[]>>(`${this.baseUrl}/get-top-featured-product`)
         .pipe(
