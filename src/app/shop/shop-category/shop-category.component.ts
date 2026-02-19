@@ -1,4 +1,6 @@
-import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import Swiper from 'swiper';
+import { Navigation } from 'swiper/modules';
 import category_data from 'src/app/shared/data/category-data';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import { ICategoryType } from 'src/app/shared/types/category-d-t';
@@ -10,66 +12,91 @@ import { CategoryDTO } from 'src/app/shared/types/product-list-model';
   templateUrl: './shop-category.component.html',
   styleUrls: ['./shop-category.component.scss']
 })
-export class ShopCategoryComponent implements OnInit {
-  @Input() style_2:Boolean = false;
-  @Input() style_3:Boolean = false;
-  @Input() style_4:Boolean = false;
-  @Input() shop_category_2:Boolean = false;
-  public category_data:ICategoryType[] = category_data;
+export class ShopCategoryComponent implements OnInit, AfterViewInit {
+  @Input() style_2: Boolean = false;
+  @Input() style_3: Boolean = false;
+  @Input() style_4: Boolean = false;
+  @Input() shop_category_2: Boolean = false;
+  public category_data: ICategoryType[] = category_data;
+  private swiperInstance: Swiper | undefined;
+  private dataLoaded = false;
+  private viewReady = false;
 
   constructor(
-    public utilsService:UtilsService,
+    public utilsService: UtilsService,
     private productService: ProductService,
     private cdr: ChangeDetectorRef
-  ){}
+  ) { }
 
   ngOnInit(): void {
-    // Load categories from API when style_2 is true (home-style-2 page)
     if (this.style_2) {
       this.loadCategoriesFromAPI();
     }
   }
 
-  /**
-   * Load categories from API and transform to ICategoryType format
-   */
+  ngAfterViewInit(): void {
+    this.viewReady = true;
+    this.tryInitSwiper();
+  }
+
+  private tryInitSwiper(): void {
+    if (!this.viewReady) return;
+    if (!this.style_2 || this.dataLoaded) {
+      setTimeout(() => this.initSwiper(), 100);
+    }
+  }
+
+  private initSwiper(): void {
+    if (this.swiperInstance) {
+      this.swiperInstance.destroy(true, true);
+      this.swiperInstance = undefined;
+    }
+    this.swiperInstance = new Swiper('.category-swiper', {
+      modules: [Navigation],
+      slidesPerView: 3,
+      spaceBetween: 30,
+      loop: true,
+      navigation: {
+        nextEl: '.category-swiper-next',
+        prevEl: '.category-swiper-prev',
+      },
+      breakpoints: {
+        1200: { slidesPerView: 3 },
+        992:  { slidesPerView: 3 },
+        768:  { slidesPerView: 2 },
+        576:  { slidesPerView: 1 },
+        0:    { slidesPerView: 1 },
+      },
+    });
+  }
+
   private loadCategoriesFromAPI(): void {
     this.productService.getAllCategories().subscribe({
       next: (categories: CategoryDTO[]) => {
         if (categories && categories.length > 0) {
           this.category_data = this.transformCategoriesToICategoryType(categories);
-          // Analyze image brightness after data is set (only for style_2)
-          if (this.style_2) {
-            setTimeout(() => this.analyzeImageBrightness(), 100);
-          }
+          setTimeout(() => this.analyzeImageBrightness(), 50);
         } else {
-          // Fallback to static data if API returns empty
           this.category_data = category_data;
         }
+        this.dataLoaded = true;
+        this.tryInitSwiper();
       },
       error: (error) => {
         console.error('Error loading categories from API:', error);
-        // Fallback to static data on error
         this.category_data = category_data;
+        this.dataLoaded = true;
+        this.tryInitSwiper();
       }
     });
   }
 
-  /**
-   * Transform CategoryDTO[] to ICategoryType[] format
-   * Groups categories by parent and creates children arrays
-   */
   private transformCategoriesToICategoryType(categories: CategoryDTO[]): ICategoryType[] {
-    // Find parent categories (where parentCategoryId is null)
     const parentCategories = categories.filter(cat => !cat.parentCategoryId);
-    
-    // Transform parent categories to ICategoryType format
     return parentCategories.map(parent => {
-      // Find children of this parent
       const children = categories
         .filter(cat => cat.parentCategoryId === parent.id)
         .map(cat => cat.categoryName);
-      
       return {
         id: parent.id,
         img: parent.image || undefined,
@@ -79,92 +106,42 @@ export class ShopCategoryComponent implements OnInit {
     });
   }
 
-  /**
-   * Default banner image path
-   */
   readonly DEFAULT_BANNER_IMAGE = 'assets/img/default-img/banner.png';
 
-  /**
-   * Get image URL or default if empty/null (for style_2, also use default if from assets folder)
-   */
   getImageUrl(imageUrl: string | undefined): string {
-    if (!imageUrl || imageUrl.trim() === '') {
-      return this.DEFAULT_BANNER_IMAGE;
-    }
-    // For home-style-2, don't show images from assets folder (static data) - use default instead
+    if (!imageUrl || imageUrl.trim() === '') return this.DEFAULT_BANNER_IMAGE;
     if (this.style_2) {
       const normalizedUrl = imageUrl.toLowerCase().trim();
       if (normalizedUrl.startsWith('/assets/') || normalizedUrl.startsWith('assets/')) {
-        // Check if it's the default image path - allow it
-        if (!normalizedUrl.includes('default-img')) {
-          return this.DEFAULT_BANNER_IMAGE;
-        }
+        if (!normalizedUrl.includes('default-img')) return this.DEFAULT_BANNER_IMAGE;
       }
     }
     return imageUrl;
   }
 
-  /**
-   * Analyze image brightness and set isDark property for each category
-   */
   private analyzeImageBrightness(): void {
-    // Only analyze first 3 categories (the ones displayed in style_2)
-    this.category_data.slice(0, 3).forEach((item) => {
+    this.category_data.forEach((item) => {
       const img = new Image();
       img.crossOrigin = 'anonymous';
-      
       img.onload = () => {
         try {
           const canvas = document.createElement('canvas');
           const ctx = canvas.getContext('2d');
-          
-          if (!ctx) {
-            // Fallback: assume dark if canvas not supported
-            item.isDark = true;
-            this.cdr.detectChanges();
-            return;
-          }
-
-          canvas.width = img.width;
-          canvas.height = img.height;
+          if (!ctx) { item.isDark = true; this.cdr.detectChanges(); return; }
+          canvas.width = img.width; canvas.height = img.height;
           ctx.drawImage(img, 0, 0);
-
-          // Sample pixels from the image (sample every 10th pixel for performance)
           const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
           const data = imageData.data;
-          let brightnessSum = 0;
-          let pixelCount = 0;
-
-          for (let i = 0; i < data.length; i += 40) { // Sample every 10th pixel (RGBA = 4 bytes)
-            const r = data[i];
-            const g = data[i + 1];
-            const b = data[i + 2];
-            // Calculate brightness using relative luminance formula
-            const brightness = (r * 0.299 + g * 0.587 + b * 0.114);
-            brightnessSum += brightness;
+          let brightnessSum = 0, pixelCount = 0;
+          for (let i = 0; i < data.length; i += 40) {
+            brightnessSum += (data[i] * 0.299 + data[i+1] * 0.587 + data[i+2] * 0.114);
             pixelCount++;
           }
-
-          const averageBrightness = brightnessSum / pixelCount;
-          // If average brightness is above 128 (midpoint), image is light, use black text
-          // If below 128, image is dark, use light/white text
-          item.isDark = averageBrightness < 128;
-          // Trigger change detection to update the view
+          item.isDark = (brightnessSum / pixelCount) < 128;
           this.cdr.detectChanges();
-        } catch (error) {
-          console.error('Error analyzing image brightness:', error);
-          // Fallback: assume dark
-          item.isDark = true;
-          this.cdr.detectChanges();
-        }
+        } catch { item.isDark = true; this.cdr.detectChanges(); }
       };
-
-      img.onerror = () => {
-        // Fallback: assume dark if image fails to load
-        item.isDark = true;
-        this.cdr.detectChanges();
-      };
-
+      img.onerror = () => { item.isDark = true; this.cdr.detectChanges(); };
       img.src = this.getImageUrl(item.img);
     });
   }
