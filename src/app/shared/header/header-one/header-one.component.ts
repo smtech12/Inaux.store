@@ -48,12 +48,12 @@ export class HeaderOneComponent implements OnInit {
   onLogoError(event: any): void {
     try {
       if (event && event.target) {
-        event.target.src = '/assets/img/logo/logo.png';
-        this.logoPath = '/assets/img/logo/logo.png';
+        event.target.src = '';
+        this.logoPath = '';
       }
     } catch (error) {
       console.error('Error handling logo fallback:', error);
-      this.logoPath = '/assets/img/logo/logo.png';
+      this.logoPath = '';
     }
   }
 
