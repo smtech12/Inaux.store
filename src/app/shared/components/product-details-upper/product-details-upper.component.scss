@@ -94,59 +94,12 @@
     }
   }
 
-  // Dark mode for modal content
-  .size-guide-modal {
-    background-color: #1a1a1a;
-    border: 1px solid #333;
-    color: #fff;
 
-    .size-guide-modal-header {
-      border-bottom: 1px solid #333;
-
-      h5 {
-        color: #fff;
-      }
-
-      .size-guide-modal-close {
-        color: #fff;
-
-        &:hover {
-          color: $theme-color;
-        }
-      }
-    }
-
-    .size-guide-modal-content {
-      .size-guide-loading {
-        p {
-          color: #cccccc;
-        }
-      }
-
-      .size-guide-empty {
-        p {
-          color: #cccccc;
-        }
-      }
-
-      .size-guide-images {
-        .size-guide-item {
-          img {
-            border: 1px solid #333;
-          }
-
-          p {
-            color: #fff;
-          }
-        }
-      }
-    }
-  }
 }
 
 
 .size-guide-modal {
-  background-color: white;
+  background-color: black;
   border-radius: 8px;
   max-width: 800px;
   max-height: 90vh;
@@ -239,6 +192,56 @@
           margin: 0;
           color: $heading-color;
           font-weight: 500;
+        }
+      }
+    }
+  }
+}
+
+:host-context(.dark-mode) {
+  .size-guide-modal {
+    background-color: #1a1a1a !important;
+    border: 1px solid #333;
+    color: #fff;
+
+    .size-guide-modal-header {
+      border-bottom: 1px solid #333;
+
+      h5 {
+        color: #fff;
+      }
+
+      .size-guide-modal-close {
+        color: #fff;
+
+        &:hover {
+          color: $theme-color;
+        }
+      }
+    }
+
+    .size-guide-modal-content {
+      .size-guide-loading {
+        p {
+          color: #cccccc;
+        }
+      }
+
+      .size-guide-empty {
+        p {
+          color: #cccccc;
+        }
+      }
+
+      .size-guide-images {
+        .size-guide-item {
+          img {
+            border: 1px solid #333;
+          }
+
+          p {
+            color: #fff;
+          }
         }
       }
     }
@@ -919,6 +922,59 @@
 
         .timeline-content h7 {
           color: #007bff;
+        }
+      }
+    }
+  }
+}
+
+:host-context(.dark-mode) {
+  .size-guide-modal {
+    background-color: #1a1a1a !important;
+    border: 1px solid #333;
+    color: #fff;
+
+    .size-guide-modal-header {
+      border-bottom: 1px solid #333 !important;
+
+      h5 {
+        color: #fff !important;
+      }
+
+      .size-guide-modal-close {
+        color: #fff !important;
+
+        &:hover {
+          color: $theme-color !important;
+        }
+      }
+    }
+
+    .size-guide-modal-content {
+      background-color: #1a1a1a !important;
+      color: #fff !important;
+
+      .size-guide-loading {
+        p {
+          color: #cccccc !important;
+        }
+      }
+
+      .size-guide-empty {
+        p {
+          color: #cccccc !important;
+        }
+      }
+
+      .size-guide-images {
+        .size-guide-item {
+          img {
+            border: 1px solid #333 !important;
+          }
+
+          p {
+            color: #fff !important;
+          }
         }
       }
     }
