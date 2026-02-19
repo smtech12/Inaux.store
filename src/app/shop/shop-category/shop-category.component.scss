@@ -1,32 +1,22 @@
 // Style for home-style-2: Position at bottom center and dynamic text color
 .banner__area.pt-95 .banner__content {
-  top: auto !important;
-  bottom: 20px !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  text-align: center;
+  text-align: left;
 
-  h5 {
-    font-weight: 800 !important;
-    font-size: 18px !important;
-    margin-bottom: 10px !important;
+  a {
+    transition: color 0.3s ease;
 
-    a {
-      font-weight: 800 !important;
+    &:hover {
+      color: #ffc959 !important; // Or primary theme color
     }
-  }
 
-  // Dark image: white text
-  &.banner__content-dark h5,
-  &.banner__content-dark h5 a,
-  &.banner__content-dark .link-btn {
-    color: #fff !important;
-  }
+    i {
+      font-size: 14px;
+      transition: transform 0.3s ease;
+    }
 
-  // Light image: dark text (default)
-  &:not(.banner__content-dark) h5,
-  &:not(.banner__content-dark) h5 a {
-    color: #ffffff !important;
+    &:hover i {
+      transform: translateX(5px);
+    }
   }
 }
 

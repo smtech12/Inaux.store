@@ -9,17 +9,20 @@
           <div class="swiper-wrapper">
             <div *ngFor="let item of category_data" class="swiper-slide">
               <div class="banner__item mb-30 p-relative">
-                <div class="banner__thumb fix">
+                <div class="banner__thumb fix" style="border-radius: 12px; overflow: hidden;">
                   <a [routerLink]="['/shop']"
                     [queryParams]="{category: utilsService.convertToURL(item.parentTitle), categoryId: item.id}"
                     class="w-img">
-                    <img [src]="getImageUrl(item.img)" alt="banner" />
+                    <img [src]="getImageUrl(item.img)" alt="banner" style="object-fit: cover; aspect-ratio: 1/1;" />
                   </a>
                 </div>
-                <div class="banner__content p-absolute transition-3" [class.banner__content-dark]="item.isDark">
+                <div class="banner__content mt-15">
                   <a [routerLink]="['/shop']"
                     [queryParams]="{category: utilsService.convertToURL(item.parentTitle), categoryId: item.id}"
-                    class="os-btn">{{ item.parentTitle }}</a>
+                    style="display: flex; align-items: center; justify-content: space-between; color: #333; font-weight: 600; font-size: 16px;">
+                    <span>{{ item.parentTitle }}</span>
+                    <i class="fal fa-arrow-right ml-10"></i>
+                  </a>
                 </div>
               </div>
             </div>

@@ -61,11 +61,11 @@ export class ShopCategoryComponent implements OnInit, AfterViewInit {
         prevEl: '.category-swiper-prev',
       },
       breakpoints: {
-        1200: { slidesPerView: 3 },
-        992:  { slidesPerView: 3 },
-        768:  { slidesPerView: 2 },
-        576:  { slidesPerView: 1 },
-        0:    { slidesPerView: 1 },
+        1200: { slidesPerView: 5, spaceBetween: 20 },
+        992: { slidesPerView: 4, spaceBetween: 20 },
+        768: { slidesPerView: 3, spaceBetween: 15 },
+        576: { slidesPerView: 2.5, spaceBetween: 15 },
+        0: { slidesPerView: 2.2, spaceBetween: 10 },
       },
     });
   }
@@ -134,7 +134,7 @@ export class ShopCategoryComponent implements OnInit, AfterViewInit {
           const data = imageData.data;
           let brightnessSum = 0, pixelCount = 0;
           for (let i = 0; i < data.length; i += 40) {
-            brightnessSum += (data[i] * 0.299 + data[i+1] * 0.587 + data[i+2] * 0.114);
+            brightnessSum += (data[i] * 0.299 + data[i + 1] * 0.587 + data[i + 2] * 0.114);
             pixelCount++;
           }
           item.isDark = (brightnessSum / pixelCount) < 128;
