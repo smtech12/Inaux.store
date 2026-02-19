@@ -1,12 +1,12 @@
 export interface IMenuType {
-  link:string,
-  title:string,
-  hasDropdown?:boolean,
-  megamenu?:boolean,
-  dropdownItems?:{
+  link: string,
+  title: string,
+  hasDropdown?: boolean,
+  megamenu?: boolean,
+  dropdownItems?: {
     link: string
     title: string,
-    dropdownMenu?:{
+    dropdownMenu?: {
       link: string
       title: string,
     }[]
@@ -15,11 +15,12 @@ export interface IMenuType {
 
 
 // Define the menu data type
-export interface IMobileMenu{
+export interface IMobileMenu {
   title: string;
   link?: string;
   dropdownMenu?: {
     link: string;
     title: string;
+    queryParams?: { [key: string]: any };
   }[];
 }

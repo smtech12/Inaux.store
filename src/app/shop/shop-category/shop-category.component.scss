@@ -42,6 +42,10 @@
 .category-swiper-wrapper {
   position: relative;
   padding: 0 50px; // make room for buttons on left and right
+
+  @media (max-width: 575px) {
+    padding: 0; // Remove padding on mobile — arrows are hidden
+  }
 }
 
 .category-swiper-prev,
@@ -80,6 +84,11 @@
   &.swiper-button-disabled {
     opacity: 0.4;
     pointer-events: none;
+  }
+
+  // Hide nav arrows on small mobile — user can swipe instead
+  @media (max-width: 575px) {
+    display: none;
   }
 }
 

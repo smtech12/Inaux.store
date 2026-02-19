@@ -11,17 +11,19 @@
       <ul>
         <ng-container *ngFor="let menu of mobile_menus; let i = index">
           <!-- Show dropdown menu if dropdownMenu exists -->
-          <li *ngIf="menu.dropdownMenu" [ngClass]="'menu-item-has-children has-droupdown ' + (activeMenu === menu.title ? 'active' : '')">
+          <li *ngIf="menu.dropdownMenu"
+            [ngClass]="'menu-item-has-children has-droupdown ' + (activeMenu === menu.title ? 'active' : '')">
             <a (click)="handleOpenMenu(menu.title)">{{ menu.title }}</a>
             <ul [ngClass]="'sub-menu ' + (activeMenu === menu.title ? 'active' : '')">
               <li *ngFor="let sub_m of menu.dropdownMenu; let index = index">
-                <a [routerLink]="sub_m.link">{{ sub_m.title }}</a>
+                <a [routerLink]="sub_m.link" [queryParams]="sub_m.queryParams || {}"
+                  (click)="utilsService.handleOpenMobileMenu()">{{ sub_m.title }}</a>
               </li>
             </ul>
           </li>
           <!-- Show direct link if no dropdownMenu -->
           <li *ngIf="!menu.dropdownMenu">
-            <a [routerLink]="menu.link">{{ menu.title }}</a>
+            <a [routerLink]="menu.link" (click)="utilsService.handleOpenMobileMenu()">{{ menu.title }}</a>
           </li>
         </ng-container>
       </ul>
@@ -31,7 +33,5 @@
 </section>
 
 <!--  body overlay  -->
-<div
-(click)="utilsService.handleOpenMobileMenu()"
-  [ngClass]="'body-overlay transition-3 ' + (utilsService.openMobileMenus ? 'opened' : '')"
-></div>
+<div (click)="utilsService.handleOpenMobileMenu()"
+  [ngClass]="'body-overlay transition-3 ' + (utilsService.openMobileMenus ? 'opened' : '')"></div>
