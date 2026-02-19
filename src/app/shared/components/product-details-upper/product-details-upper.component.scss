@@ -56,6 +56,7 @@
 }
 
 
+
 // Size Guide Modal Styles
 .size-guide-modal-overlay {
   position: fixed;
@@ -69,6 +70,80 @@
   justify-content: center;
   z-index: 9999;
 }
+
+:host-context(.dark-mode) {
+  .size-guide-btn-main {
+    color: #fff;
+    border-color: #fff;
+
+    &:hover {
+      background-color: #fff;
+      color: #000;
+      border-color: #fff;
+    }
+  }
+
+  .size-guide-btn {
+    color: #fff;
+    border-color: #fff;
+
+    &:hover {
+      background-color: #fff;
+      color: #000;
+      border-color: #fff;
+    }
+  }
+
+  // Dark mode for modal content
+  .size-guide-modal {
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    color: #fff;
+
+    .size-guide-modal-header {
+      border-bottom: 1px solid #333;
+
+      h5 {
+        color: #fff;
+      }
+
+      .size-guide-modal-close {
+        color: #fff;
+
+        &:hover {
+          color: $theme-color;
+        }
+      }
+    }
+
+    .size-guide-modal-content {
+      .size-guide-loading {
+        p {
+          color: #cccccc;
+        }
+      }
+
+      .size-guide-empty {
+        p {
+          color: #cccccc;
+        }
+      }
+
+      .size-guide-images {
+        .size-guide-item {
+          img {
+            border: 1px solid #333;
+          }
+
+          p {
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+}
+
 
 .size-guide-modal {
   background-color: white;
