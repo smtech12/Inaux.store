@@ -62,19 +62,7 @@ const menuData: IMenuType[] = [
     //   // },
     // ]
   },
-  {
-    link: '/shop',
-    title: 'Category',
-    hasDropdown: true,
-    dropdownItems: [
-      { link: '/shop', title: 'Lighting & Chair' },
-      { link: '/shop', title: 'Decoration & Accessories' },
-      { link: '/shop', title: 'Clothing & Oil' },
-      { link: '/shop', title: 'FASHION FOR MEN’S' },
-      { link: '/shop', title: 'FASHION FOR WOMEN’S' },
-      { link: '/shop', title: 'FASHION FOR BABY' },
-    ]
-  },
+
   // {
   //   link: '/pages/blog',
   //   title: 'Blog',
@@ -126,18 +114,7 @@ export const mobile_menus: IMobileMenu[] = [
     title: "Shop",
     link: '/shop',
   },
-  {
-    title: "Category",
-    link: '/shop',
-    dropdownMenu: [
-      { link: '/shop', title: 'Lighting & Chair' },
-      { link: '/shop', title: 'Decoration & Accessories' },
-      { link: '/shop', title: 'Clothing & Oil' },
-      { link: '/shop', title: 'FASHION FOR MEN’S' },
-      { link: '/shop', title: 'FASHION FOR WOMEN’S' },
-      { link: '/shop', title: 'FASHION FOR BABY' },
-    ]
-  },
+
   {
     title: "Contact",
     link: '/contact',
