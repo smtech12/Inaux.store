@@ -62,6 +62,7 @@ const menuData: IMenuType[] = [
     //   // },
     // ]
   },
+
   // {
   //   link: '/pages/blog',
   //   title: 'Blog',
@@ -110,9 +111,10 @@ export const mobile_menus: IMobileMenu[] = [
     link: '/home',
   },
   {
-    title: "Shop", 
+    title: "Shop",
     link: '/shop',
   },
+
   {
     title: "Contact",
     link: '/contact',

@@ -1,14 +1,17 @@
 export interface IMenuType {
   link: string,
   title: string,
+  queryParams?: { [key: string]: any },
   hasDropdown?: boolean,
   megamenu?: boolean,
   dropdownItems?: {
     link: string
     title: string,
+    queryParams?: { [key: string]: any },
     dropdownMenu?: {
       link: string
       title: string,
+      queryParams?: { [key: string]: any },
     }[]
   }[],
 }
