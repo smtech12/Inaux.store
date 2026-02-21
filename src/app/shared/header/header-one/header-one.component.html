@@ -3,14 +3,12 @@
     [ngClass]="['header__area', transparent ? '' : '', header_big ? '' : !white_bg ? 'grey-bg' : '', sticky ? 'sticky' : '']"
     id="header-sticky">
     <!-- TICKER :: START -->
-<div class="ticker-wrap">
-  <div class="ticker">
-    <span>Coming Soon</span>
-    <span>Coming Soon</span>
-    <span>Coming Soon</span>
-  </div>
-</div>
-<!-- TICKER :: END -->
+    <div class="ticker-wrap" *ngIf="announcementBarItems.length > 0">
+      <div class="ticker">
+        <span *ngFor="let item of announcementBarItems">{{ item.title }} {{ item.subtitle }}</span>
+      </div>
+    </div>
+    <!-- TICKER :: END -->
     <div [ngClass]="header_big ? 'container-fluid' : 'container'" class="container">
       <div class="row align-items-center">
         <div
