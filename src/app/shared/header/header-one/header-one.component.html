@@ -23,7 +23,7 @@
             </ul>
           </div>
         </div>
-        <div [ngClass]="header_big ? 'col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12' : 'col-xl-4 col-lg-4 col-md-4 col-sm-4'">
+        <div [ngClass]="header_big ? 'col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4' : 'col-xl-4 col-lg-4 col-md-4 col-sm-4'">
           <div class="logo">
             <a routerLink="/home">
               <img class="brand-logo m-auto" [src]="logoPath" alt="logo" (error)="onLogoError($event)">
@@ -70,7 +70,7 @@
                     <app-nav-manus></app-nav-manus>
                     <!-- nav menu end -->
                   </div>
-                  <div class="mobile-menu-btn d-lg-none">
+                  <div class="mobile-menu-btn d-lg-none f-right">
                     <a (click)="utilsService.handleOpenMobileMenu()" class="mobile-menu-toggle cursor-pointer">
                       <i class="fal fa-bars"></i>
                     </a>

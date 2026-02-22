@@ -845,16 +845,26 @@ span.help-txt a {
     }
 
     .slider__height-4 {
-        height: 185px !important;
+        // height: 185px !important;
+    height: 133px !important;
     }
-
+.slider__area .swiper-pagination-bullets .swiper-pagination-bullet {
+    font-size: 0;
+    width: 8px !important;
+    height: 8px !important;
+    background: #c2c2c2 !important;
+    border-radius: 50%;
+    margin: 0 2px !important;
+    border: 1px solid transparent !important;
+    opacity: 1;
+}
     .hero-img {
         height: 100%;
         width: 100%;
         background-position: top center;
         background-size: cover;
         background-repeat: no-repeat;
-        min-height: 185px;
+        min-height: 133px;
     }
 
     .hero-img img {
