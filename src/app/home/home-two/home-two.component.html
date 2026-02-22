@@ -79,7 +79,7 @@
           <div class="col-xl-6 offset-xl-6 col-lg-6 offset-lg-6">
             <div class="product__slider-2">
               <div class="row">
-                <div *ngFor="let item of trending_products; let i = index" class="col-lg-4 col-md-6 product__item">
+                <div *ngFor="let item of trending_products; let i = index" class="col-lg-6 col-md-6 product__item">
                   <app-product-item [product]="item" [openModalAlways]="true"></app-product-item>
                 </div>
               </div>
@@ -117,7 +117,7 @@
     <div class="container">
       <div class="sale__area-slider-2">
         <div class="row">
-          <div *ngFor="let item of discount_products" class="col-xl-2 col-lg-3 col-md-4 col-6 sale__item">
+          <div *ngFor="let item of discount_products" class="col-xl-3 col-lg-3 col-md-4 col-6 sale__item">
             <app-product-item [product]="item"></app-product-item>
           </div>
         </div>

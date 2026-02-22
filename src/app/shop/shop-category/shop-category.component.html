@@ -1,25 +1,24 @@
 <div *ngIf="!shop_category_2"
   [ngClass]="['banner__area', style_2 ? 'pt-95' : '', style_3 ? 'pt-20' : '', style_4 ? 'pt-30' : '']"
   class="mt-minus-60">
-  <div [ngClass]="['container', style_3 ? 'custom-container' : '']">
+  <div [ngClass]="['container, pb-100', style_3 ? 'custom-container' : '']">
     <div
       [ngClass]="[style_2 ? '' : (!style_3 && !style_4 ? 'banner__inner p-relative mt--95 z-index-1' : ''), style_4 ? 'banner__inner-2 p-relative' : '']">
       <div class="category-swiper-wrapper p-relative">
         <div class="category-swiper swiper-container">
           <div class="swiper-wrapper">
             <div *ngFor="let item of category_data" class="swiper-slide">
-              <div class="banner__item mb-30 p-relative">
-                <div class="banner__thumb fix" style="border-radius: 12px; overflow: hidden;">
+              <div class="banner__item">
+                <div class="banner__thumb fix">
                   <a [routerLink]="['/shop']"
                     [queryParams]="{category: utilsService.convertToURL(item.parentTitle), categoryId: item.id}"
                     class="w-img">
                     <img [src]="getImageUrl(item.img)" alt="banner" style="object-fit: cover; aspect-ratio: 1/1;" />
                   </a>
                 </div>
-                <div class="banner__content mt-15">
+                <div class="banner__content">
                   <a [routerLink]="['/shop']"
-                    [queryParams]="{category: utilsService.convertToURL(item.parentTitle), categoryId: item.id}"
-                    style="display: flex; align-items: center; justify-content: space-between; color: #333; font-weight: 600; font-size: 16px;">
+                    [queryParams]="{category: utilsService.convertToURL(item.parentTitle), categoryId: item.id}">
                     <span>{{ item.parentTitle }}</span>
                     <i class="fal fa-arrow-right ml-10"></i>
                   </a>
