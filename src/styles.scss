@@ -908,7 +908,8 @@ span.help-txt a {
 
 @media (max-width: 991.98px) {
     .logo img {
-        margin: auto;
+        margin: auto !important;
+        width: 125px !important;
     }
     .brand-logo {
     width: 125px !important;
