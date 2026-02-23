@@ -907,12 +907,12 @@ span.help-txt a {
 }
 
 @media (max-width: 991.98px) {
-    .logo img {
+    .logo a {
         margin: auto !important;
         width: 125px !important;
     }
     .brand-logo {
-    width: 125px !important;
+    // width: 125px !important;
 }
 
     .header__area {
@@ -959,7 +959,7 @@ span.help-txt a {
 
     .header__action.header__action-2 {
         width: 100%;
-        border-top: 1px solid #ffc959;
+        // border-top: 1px solid #ffc959;
     }
 
     .header__action.header__action-2>ul {
