@@ -910,6 +910,9 @@ span.help-txt a {
     .logo img {
         margin: auto;
     }
+    .brand-logo {
+    width: 125px !important;
+}
 
     .header__area {
         padding-top: 0px;
@@ -973,15 +976,33 @@ span.help-txt a {
         color: #ffc959 !important;
     }
 
+    // .page__title {
+    //     height: 130px !important;
+    //     background-size: cover !important;
+    //     background-position: center;
+    //     background-repeat: no-repeat;
+    //     position: relative;
+    //     background-color: #000 !important;
+    // }
     .page__title {
-        height: 130px !important;
-        background-size: cover !important;
-        background-position: center;
-        background-repeat: no-repeat;
-        position: relative;
-        background-color: #000 !important;
-    }
-
+    height: 80px;
+    background-size: contain !important;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    background-color: #000 !important;
+}
+.product__details-tab-nav .nav-tabs .nav-link {
+    padding: 7px 0px !important;
+    border: 0;
+    font-size: 14px;
+    color: #ffffff;
+    font-weight: 500;
+    width: 100%;
+}
+.contact-icon {
+    margin: 0 0 18px 0;
+}
     .page__title-inner {
         margin-top: 0px;
     }
