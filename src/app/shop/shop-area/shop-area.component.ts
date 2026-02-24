@@ -59,7 +59,7 @@ export class ShopAreaComponent {
       this.size = params['size'] ? params['size'] : null;
       this.color = params['color'] ? params['color'] : null;
       this.pageNo = params['page'] ? params['page'] : this.pageNo;
-      this.sortBy = params['sortBy'] ? params['sortBy'] : 'asc';
+      this.sortBy = params['sortBy'] ? params['sortBy'] : 'a-z';
       // Restore availability filter from query params
       if (params['availability']) {
         this.selectedAvailability = params['availability'].split(',');

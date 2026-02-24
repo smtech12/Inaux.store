@@ -137,7 +137,9 @@ export class ProductService {
   // Sorting Filter
   public sortProducts(products: IProduct[], payload: string): any {
 
-    if (payload === 'asc') {
+    if (payload === 'a-z') {
+      return products.sort((a, b) => a.title.localeCompare(b.title));
+    } else if (payload === 'asc') {
       return products.sort((a, b) => {
         if (a.id < b.id) {
           return -1;

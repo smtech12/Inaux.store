@@ -69,6 +69,7 @@
               <span class="sort-label">Sort by</span>
               <div class="sort-wrapper p-relative">
                 <select [(ngModel)]="sortBy" (ngModelChange)="onSortingChange($event)">
+                  <option value="a-z">A to Z</option>
                   <option value="asc">Best selling</option>
                   <option value="sale">On Sale</option>
                   <option value="high">Price High To Low</option>
@@ -179,9 +180,10 @@
 
       <!-- Sort by (inline) -->
       <div class="filter-offcanvas__sort-row">
-        <span>Sort by:</span>
+        <span>Sort by</span>
         <select [(ngModel)]="sortBy" (ngModelChange)="onSortingChange($event)">
-          <option value="asc">Alphabetically, A-Z</option>
+          <option value="a-z">A to Z</option>
+          <option value="asc">Best selling</option>
           <option value="sale">On Sale</option>
           <option value="high">Price High To Low</option>
           <option value="low">Price Low To High</option>
