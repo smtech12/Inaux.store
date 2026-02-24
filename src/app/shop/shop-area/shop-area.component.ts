@@ -23,8 +23,6 @@ export class ShopAreaComponent {
   public maxPrice: number = this.productService.maxPrice;
   public niceSelectOptions = this.productService.filterSelect;
   public brands: string[] = [];
-  public category: string | null = null;
-  public subcategory: string | null = null;
   public size: string | null = null;
   public color: string | null = null;
   public brand: string | null = null;
@@ -58,8 +56,6 @@ export class ShopAreaComponent {
       // Don't set maxPrice from params - it will be set from product list
       const filterMaxPrice = params['maxPrice'] ? Number(params['maxPrice']) : null;
       this.brand = params['brand'] ? params['brand'] : null;
-      this.category = params['category'] ? params['category'] : null;
-      this.subcategory = params['subcategory'] ? params['subcategory'] : null;
       this.size = params['size'] ? params['size'] : null;
       this.color = params['color'] ? params['color'] : null;
       this.pageNo = params['page'] ? params['page'] : this.pageNo;
@@ -101,36 +97,6 @@ export class ShopAreaComponent {
           this.products = this.productService.sortProducts(response, this.sortBy);
           console.log('After sorting:', this.products);
 
-          // Category Filter (only if not using categoryId API - API already filters by category)
-          if (!categoryId && this.category) {
-            this.products = this.products.filter(
-              (p) => this.utilsService.convertToURL(p.parentCategory) === this.category
-            );
-          }
-          // sub category Filter
-          if (this.subcategory) {
-            this.products = this.products.filter(
-              (p) => this.utilsService.convertToURL(p.category) === this.subcategory
-            );
-          }
-          // size Filter
-          if (this.size) {
-            this.products = this.products.filter((product) => {
-              return (
-                product.sizes &&
-                product.sizes.some((size) => size.toLowerCase() === this.size)
-              );
-            });
-          }
-          // color Filter
-          if (this.color) {
-            this.products = this.products.filter((product) => {
-              return (
-                product.colors &&
-                product.colors.some((c) => c.split(' ').join('-').toLowerCase() === this.color)
-              );
-            });
-          }
           // brand Filter
           if (this.brand) {
             this.products = this.products.filter((p) => p.brand.toLowerCase() === this.brand);
