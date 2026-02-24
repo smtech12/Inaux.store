@@ -1,13 +1,16 @@
-<div class="features__product">
-    <ul>
-        <li *ngFor="let item of feature_products" class="mb-20">
-            <div class="featires__product-wrapper d-flex">
-                <div class="features__product-thumb mr-15">
+<div class="features__product" [ngClass]="{'horizontal-layout': layout === 'horizontal'}">
+    <ul [class.row]="layout === 'horizontal'" [class.custom-row-10]="layout === 'horizontal'">
+        <li *ngFor="let item of feature_products" [class.mb-20]="layout === 'vertical'"
+            [class.col-xl-2]="layout === 'horizontal'" [class.col-lg-3]="layout === 'horizontal'"
+            [class.col-md-4]="layout === 'horizontal'" [class.col-sm-6]="layout === 'horizontal'"
+            [class.col-6]="layout === 'horizontal'" [class.mb-30]="layout === 'horizontal'">
+            <div class="featires__product-wrapper d-flex" [class.flex-column]="layout === 'horizontal'">
+                <div class="features__product-thumb" [class.mr-15]="layout === 'vertical'">
                     <a [routerLink]="['/shop/product-details', item.id]">
-                        <img [src]="item.img" alt="pro-sm-1" style="height: 110px;width: 86px;">
+                        <img [src]="item.img" alt="pro-sm-1">
                     </a>
                 </div>
-                <div class="features__product-content">
+                <div class="features__product-content" [class.text-center]="layout === 'horizontal'">
                     <h5><a [routerLink]="['/shop/product-details', item.id]">{{item.title}}</a></h5>
                     <div class="price">
                         <span>Rs {{item.price}}</span>

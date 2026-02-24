@@ -10,6 +10,7 @@ import { IProduct } from 'src/app/shared/types/product-d-t';
 export class FeatureProductsComponent implements OnInit, OnChanges {
 
   @Input() categoryId: number | null = null;
+  @Input() layout: 'vertical' | 'horizontal' = 'vertical';
   public feature_products: IProduct[] = [];
 
   constructor(public productService: ProductService) { }
@@ -31,9 +32,10 @@ export class FeatureProductsComponent implements OnInit, OnChanges {
     this.productService.getTopFeaturedProducts(this.categoryId).subscribe({
       next: (products) => {
         if (products && products.length > 0) {
-          // Take first 2 featured products for sidebar
-          this.feature_products = products.slice(0, 2);
-          console.log('Featured products loaded from API:', this.feature_products.length);
+          // Take more products for horizontal layout, 2 for sidebar
+          const count = this.layout === 'horizontal' ? 6 : 2;
+          this.feature_products = products.slice(0, count);
+          console.log(`Featured products loaded from API (${this.layout}):`, this.feature_products.length);
         } else {
           this.feature_products = [];
         }
