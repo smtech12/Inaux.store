@@ -177,65 +177,26 @@
       }
 
       & .shop-accordion-btn {
-
         padding: 0;
-
         width: 100%;
-
         text-align: left;
-
         background: #1a1a1a;
-
         position: relative;
-
         color: $theme-color;
-
         font-weight: 400;
-
         font-size: 16px;
 
-        &::after {
-
-          position: absolute;
-
-          content: "\f105";
-
-          right: 0;
-
-          top: 50%;
-
-          @include transform(translateY(-50%) rotate(90deg));
-
-          font-size: 18px;
-
-          font-family: "Font Awesome 5 Pro";
-
-        }
-
         &.collapsed {
-
           color: $black-soft;
 
           &:hover {
-
             color: $theme-color;
-
           }
 
           &.active {
-
             color: $theme-color;
-
           }
-
-          &::after {
-
-            @include transform(translateY(-50%) rotate(0));
-
-          }
-
         }
-
       }
 
       &__list {
