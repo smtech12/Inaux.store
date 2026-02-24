@@ -1,3 +1,38 @@
+.basic-login {
+  h3 {
+    color: #fff;
+  }
+
+  label {
+    color: rgba(255, 255, 255, 0.8);
+
+    span {
+      color: #ff0000;
+    }
+  }
+
+  input {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+
+    &:focus {
+      border-color: #ffc959;
+    }
+  }
+
+  .or-divide {
+    &::before {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    span {
+      background: #111;
+      color: rgba(255, 255, 255, 0.5);
+    }
+  }
+}
+
 .password-input-wrapper {
   position: relative;
   width: 100%;
@@ -22,7 +57,7 @@
     height: 20px;
 
     &:hover {
-      color: #bc8246;
+      color: #ffc959;
     }
 
     i {
@@ -34,22 +69,22 @@
 .address-textarea {
   width: 100%;
   padding: 12px 15px;
-  border: 1px solid #ebebeb;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 4px;
+  background: transparent;
   font-family: 'Poppins', sans-serif;
   font-size: 14px;
   line-height: 24px;
-  color: #201f1f;
+  color: #fff;
   resize: vertical;
   min-height: 80px;
 
   &:focus {
     outline: none;
-    border-color: #bc8246;
+    border-color: #ffc959;
   }
 
   &::placeholder {
-    color: #9d9d9d;
+    color: rgba(255, 255, 255, 0.3);
   }
 }
-

@@ -1,3 +1,57 @@
+.basic-login {
+  h3 {
+    color: #fff;
+  }
+
+  label {
+    color: rgba(255, 255, 255, 0.8);
+
+    span {
+      color: #ff0000;
+    }
+  }
+
+  input {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+
+    &:focus {
+      border-color: #ffc959;
+    }
+  }
+
+  .log-rem {
+    label {
+      color: rgba(255, 255, 255, 0.6);
+      cursor: pointer;
+    }
+  }
+
+  .forgot-login {
+    a {
+      color: rgba(255, 255, 255, 0.6);
+
+      &:hover {
+        color: #ffc959;
+      }
+    }
+  }
+
+  .or-divide {
+    position: relative;
+
+    &::before {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    span {
+      background: #111;
+      color: rgba(255, 255, 255, 0.5);
+    }
+  }
+}
+
 .password-input-wrapper {
   position: relative;
   width: 100%;
