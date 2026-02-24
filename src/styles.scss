@@ -202,6 +202,36 @@ TICKER BAR
 .header__action ul li > a {
     padding: 0 0 !important;
 }
+.header__action ul li .extra-info {
+    font-family: Assistant, sans-serif !important;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #000000;
+    padding: 10px 20px;
+    margin: 0;
+    min-width: 220px;
+    padding-bottom: 5px;
+    border: 1px solid #444444;
+    z-index: 9;
+    max-height: 400px;
+    overflow: auto;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s ease-out 0s;
+}
+.header__action ul li .extra-info .extra-title h5 {
+    font-size: 14px;
+    color: #ced4da;
+    margin: 8px 0px 10px;
+    text-transform: capitalize;
+    font-family: Assistant, sans-serif !important;
+    font-weight: 400;
+}
+.header__action.header__action-2 .extra-info .my-account ul li a {
+    color: #ced4da !important;
+    transition: color 0.3s ease;
+}
 .main-menu ul li a {
     display: block;
     color: #ced4da;
@@ -408,7 +438,7 @@ a.os-btn.os-btn-2,
 
 .header__area {
     background: #000000 !important;
-    border-bottom: 1px solid #caa73d;
+    border-bottom: 1px solid #444444;
 }
 .slider__height-4 {
     height: 100%;
@@ -905,7 +935,11 @@ span.help-txt a {
         max-width: 1400px;
     }
 }
-
+@media (min-width:481px) and  (max-width: 991.98px) {
+//     .slider__height-4 {
+//     height: 153px !important;
+// }
+} 
 @media (max-width: 991.98px) {
     html, body {overflow-x: hidden;}
     .logo a {
@@ -922,7 +956,7 @@ span.help-txt a {
 
     .slider__height-4 {
         // height: 185px !important;
-    height: 133px !important;
+    // height: 133px !important;
     }
 .slider__area .swiper-pagination-bullets .swiper-pagination-bullet {
     font-size: 0;
@@ -945,7 +979,7 @@ span.help-txt a {
 
     .hero-img img {
         object-fit: cover;
-        object-position: center center;
+        object-position: left center;
         width: 100% !important;
         height: 100% !important;
     }
@@ -1114,9 +1148,9 @@ span.help-txt a {
         padding-left: 0 !important;
     }
 
-    .slider__height-4 {
-        height: 360px;
-    }
+    // .slider__height-4 {
+    //     height: 360px;
+    // }
 
     .features__item:last-child {
         padding: 5px 0;
