@@ -363,6 +363,7 @@ export class ProductService {
       topRated: false,
       bestSeller: false,
       banner: false,
+      stockStatus: dto.stockStatus,
       details: {
         details_text: '',
         details_list: [],

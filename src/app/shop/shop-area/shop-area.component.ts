@@ -145,15 +145,14 @@ export class ShopAreaComponent {
           console.log('After price filter:', this.products);
           // Calculate availability counts from the full product set (before pagination)
           this.allProducts = [...this.products];
-          this.inStockCount = this.products.filter(p => (p.quantity && p.quantity > 0) || p.stockStatus === 'In Stock').length;
-          this.outOfStockCount = this.products.filter(p => (!p.quantity || p.quantity <= 0) || p.stockStatus === 'Out of Stock').length;
+          this.inStockCount = this.products.filter(p => p.stockStatus === 'In Stock').length;
+          this.outOfStockCount = this.products.filter(p => p.stockStatus === 'Out of Stock').length;
 
           // Availability Filter
           if (this.selectedAvailability.length > 0) {
             this.products = this.products.filter(p => {
-              const isInStock = (p.quantity && p.quantity > 0) || p.stockStatus === 'In Stock';
-              if (this.selectedAvailability.includes('in_stock') && isInStock) return true;
-              if (this.selectedAvailability.includes('out_of_stock') && !isInStock) return true;
+              if (this.selectedAvailability.includes('in_stock') && p.stockStatus === 'In Stock') return true;
+              if (this.selectedAvailability.includes('out_of_stock') && p.stockStatus === 'Out of Stock') return true;
               return false;
             });
           }
