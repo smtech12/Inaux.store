@@ -90,9 +90,8 @@
 
           <div class="tab-content" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-grid" role="tabpanel" aria-labelledby="pills-grid-tab">
-              <div class="row custom-row-10">
-                <div *ngFor="let item of products"
-                  [ngClass]="{'col-xl-3 col-lg-3 col-md-6 col-sm-6 custom-col-10':shop_4_col, 'col-xl-4 col-lg-4 col-md-6 col-sm-6 custom-col-10': !shop_4_col}">
+              <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-4 custom-row-10">
+                <div *ngFor="let item of products" class="col custom-col-10">
                   <app-product-item [product]="item"></app-product-item>
                 </div>
               </div>
