@@ -594,6 +594,8 @@ export class ProductDetailsUpperComponent implements OnInit, OnChanges, OnDestro
 
   private isVariantOutOfStock(variant: VariantDTO | null | undefined): boolean {
     if (!variant) return false;
+    if (variant.stockStatus === 'In Stock') return false;
+    if (variant.stockStatus === 'Out of Stock') return true;
     return (
       (variant.stockUnits === 0 || variant.stockUnits === undefined) &&
       (variant.stockQuantity === 0 || variant.stockQuantity === undefined)
@@ -611,6 +613,8 @@ export class ProductDetailsUpperComponent implements OnInit, OnChanges, OnDestro
     }
     // Non-variable product: check product level stock
     if (this.product) {
+      if (this.product.stockStatus === 'In Stock') return false;
+      if (this.product.stockStatus === 'Out of Stock') return true;
       return (
         (this.product.stockUnits === 0 || this.product.stockUnits === undefined) &&
         (this.product.stockQuantity === 0 || this.product.stockQuantity === undefined)
