@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, HostListener } from '@angular/core';
 import { ViewportScroller } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from 'src/app/shared/services/product.service';
@@ -33,6 +33,17 @@ export class ShopAreaComponent {
   public paginate: any = {}; // Pagination use only
   public sortBy: string = 'asc'; // Sorting Order
 
+  // Filter bar properties
+  public activeDropdown: string | null = null;
+  public selectedAvailability: string[] = [];
+  public inStockCount: number = 0;
+  public outOfStockCount: number = 0;
+  public allProducts: IProduct[] = []; // unfiltered for counts
+  public priceFrom: number | null = null;
+  public priceTo: number | null = null;
+  public filterOffcanvasOpen: boolean = false;
+  public mobileActiveSection: string | null = null;
+
   constructor(
     public productService: ProductService,
     public utilsService: UtilsService,
@@ -53,6 +64,13 @@ export class ShopAreaComponent {
       this.color = params['color'] ? params['color'] : null;
       this.pageNo = params['page'] ? params['page'] : this.pageNo;
       this.sortBy = params['sortBy'] ? params['sortBy'] : 'asc';
+      // Restore availability filter from query params
+      if (params['availability']) {
+        this.selectedAvailability = params['availability'].split(',');
+      }
+      // Restore price inputs from query params
+      this.priceFrom = params['minPrice'] ? Number(params['minPrice']) : null;
+      this.priceTo = params['maxPrice'] ? Number(params['maxPrice']) : null;
 
       // Get Products from API
       const categoryId = params['categoryId'] ? Number(params['categoryId']) : null;
@@ -125,6 +143,21 @@ export class ShopAreaComponent {
             (p) => p.price >= Number(this.minPrice) && p.price <= Number(maxPriceForFilter)
           );
           console.log('After price filter:', this.products);
+          // Calculate availability counts from the full product set (before pagination)
+          this.allProducts = [...this.products];
+          this.inStockCount = this.products.filter(p => (p.quantity && p.quantity > 0) || p.stockStatus === 'In Stock').length;
+          this.outOfStockCount = this.products.filter(p => (!p.quantity || p.quantity <= 0) || p.stockStatus === 'Out of Stock').length;
+
+          // Availability Filter
+          if (this.selectedAvailability.length > 0) {
+            this.products = this.products.filter(p => {
+              const isInStock = (p.quantity && p.quantity > 0) || p.stockStatus === 'In Stock';
+              if (this.selectedAvailability.includes('in_stock') && isInStock) return true;
+              if (this.selectedAvailability.includes('out_of_stock') && !isInStock) return true;
+              return false;
+            });
+          }
+
           // Paginate Products
           this.paginate = this.productService.getPager(this.products.length, Number(+this.pageNo), this.pageSize);
           this.products = this.products.slice(this.paginate.startIndex, this.paginate.endIndex + 1);
@@ -189,6 +222,64 @@ export class ShopAreaComponent {
   handleResetFilter() {
     this.minPrice = 0;
     this.maxPrice = this.productService.maxPrice;
+    this.selectedAvailability = [];
+    this.priceFrom = null;
+    this.priceTo = null;
     this.router.navigate(['/shop']);
+  }
+
+  // Filter bar methods
+  @HostListener('document:click')
+  onDocumentClick() {
+    this.activeDropdown = null;
+  }
+
+  toggleDropdown(name: string) {
+    this.activeDropdown = this.activeDropdown === name ? null : name;
+  }
+
+  toggleAvailability(value: string) {
+    const idx = this.selectedAvailability.indexOf(value);
+    if (idx > -1) {
+      this.selectedAvailability.splice(idx, 1);
+    } else {
+      this.selectedAvailability.push(value);
+    }
+    // Re-trigger filtering via query params
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { availability: this.selectedAvailability.join(',') || null },
+      queryParamsHandling: 'merge',
+    });
+  }
+
+  resetAvailability() {
+    this.selectedAvailability = [];
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { availability: null },
+      queryParamsHandling: 'merge',
+    });
+  }
+
+  applyPriceFilter() {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {
+        minPrice: this.priceFrom || null,
+        maxPrice: this.priceTo || null,
+      },
+      queryParamsHandling: 'merge',
+    });
+  }
+
+  resetPriceFilter() {
+    this.priceFrom = null;
+    this.priceTo = null;
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { minPrice: null, maxPrice: null },
+      queryParamsHandling: 'merge',
+    });
   }
 }

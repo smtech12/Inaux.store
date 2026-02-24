@@ -7,9 +7,6 @@
           <app-category-filter></app-category-filter>
           <!-- category filter end -->
 
-          <!-- price filter start -->
-          <app-price-filter [min]="minPrice" [max]="maxPrice" (priceFilter)="updateFilter($event)"></app-price-filter>
-          <!-- price filter end -->
 
           <!-- size filter start -->
           <!-- <app-size-filtering></app-size-filtering> -->
@@ -47,33 +44,82 @@
       <div
         [ngClass]="{'col-xl-12': shop_4_col, 'col-xl-9 col-lg-9 col-md-8': !shop_4_col && !shop_3_col,'col-xl-8 offset-xl-2 col-lg-8 offset-lg-2':shop_3_col}">
         <div class="shop__content-area">
-          <div class="shop__header d-sm-flex justify-content-between align-items-center mb-40">
-            <div class="shop__header-left">
-              <div class="show-text">
-                <span>Showing 1–{{ products.length }} of {{ paginate.totalItems }} results </span>
+          <!-- mobile filter button (visible only on mobile) -->
+          <div class="shop__mobile-filter-btn d-md-none mb-20">
+            <button class="mobile-filter-toggle" (click)="filterOffcanvasOpen = true">
+              <i class="fas fa-sliders-h"></i> Filter & Sort
+            </button>
+            <span class="products-count">{{ paginate.totalItems }} products</span>
+          </div>
+
+          <!-- horizontal filter bar (desktop only) -->
+          <div class="shop__filter-bar d-none d-md-flex">
+            <div class="shop__filter-left">
+              <span class="filter-label">Filter:</span>
+
+              <!-- Availability dropdown -->
+              <div class="filter-dropdown" (click)="$event.stopPropagation()">
+                <button class="filter-dropdown-toggle" (click)="toggleDropdown('availability')">
+                  Availability <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="filter-dropdown-menu" *ngIf="activeDropdown === 'availability'">
+                  <div class="filter-dropdown-header">
+                    <span>{{ selectedAvailability.length }} selected</span>
+                    <a class="filter-reset-link" (click)="resetAvailability()">Reset</a>
+                  </div>
+                  <div class="filter-dropdown-body">
+                    <label class="filter-checkbox">
+                      <input type="checkbox" [checked]="selectedAvailability.includes('in_stock')"
+                        (change)="toggleAvailability('in_stock')">
+                      <span>In stock ({{ inStockCount }})</span>
+                    </label>
+                    <label class="filter-checkbox">
+                      <input type="checkbox" [checked]="selectedAvailability.includes('out_of_stock')"
+                        (change)="toggleAvailability('out_of_stock')">
+                      <span>Out of stock ({{ outOfStockCount }})</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Price dropdown -->
+              <div class="filter-dropdown" (click)="$event.stopPropagation()">
+                <button class="filter-dropdown-toggle" (click)="toggleDropdown('price')">
+                  Price <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="filter-dropdown-menu" *ngIf="activeDropdown === 'price'">
+                  <div class="filter-dropdown-header">
+                    <span>The highest price is Rs.{{ maxPrice | number:'1.2-2' }}</span>
+                    <a class="filter-reset-link" (click)="resetPriceFilter()">Reset</a>
+                  </div>
+                  <div class="filter-dropdown-body price-inputs">
+                    <div class="price-input-group">
+                      <span class="currency-label">Rs</span>
+                      <input type="number" placeholder="From" [(ngModel)]="priceFrom" (change)="applyPriceFilter()">
+                    </div>
+                    <div class="price-input-group">
+                      <span class="currency-label">Rs</span>
+                      <input type="number" placeholder="To" [(ngModel)]="priceTo" (change)="applyPriceFilter()">
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="shop__header-right d-flex align-items-center justify-content-between justify-content-sm-end">
-              <div class="sort-wrapper mr-30 pr-25 p-relative">
+
+            <div class="shop__filter-right">
+              <span class="sort-label">Sort by</span>
+              <div class="sort-wrapper p-relative">
                 <select [(ngModel)]="sortBy" (ngModelChange)="onSortingChange($event)">
-                  <option value="asc">Default Sorting</option>
+                  <option value="asc">Best selling</option>
                   <option value="sale">On Sale</option>
                   <option value="high">Price High To Low</option>
                   <option value="low">Price Low To High</option>
                 </select>
               </div>
-              <ul class="nav nav-pills" id="pills-tab" role="tablist">
-                <li class="nav-item">
-                  <a class="nav-link active" id="pills-grid-tab" data-bs-toggle="pill" href="#pills-grid" role="tab"
-                    aria-controls="pills-grid" aria-selected="true"><i class="fas fa-th"></i></a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" id="pills-list-tab" data-bs-toggle="pill" href="#pills-list" role="tab"
-                    aria-controls="pills-list" aria-selected="false"><i class="fas fa-list-ul"></i></a>
-                </li>
-              </ul>
+              <span class="products-count">{{ paginate.totalItems }} products</span>
             </div>
           </div>
+          <!-- horizontal filter bar end -->
 
           <!-- if no item in product  -->
           <div *ngIf="products.length === 0" class="cartmini__empty text-center mt-80">
@@ -115,9 +161,6 @@
           <app-category-filter></app-category-filter>
           <!-- category filter end -->
 
-          <!-- price filter start -->
-          <app-price-filter [min]="minPrice" [max]="maxPrice" (priceFilter)="updateFilter($event)"></app-price-filter>
-          <!-- price filter end -->
 
           <!-- size filter start -->
           <app-size-filtering></app-size-filtering>
@@ -155,3 +198,76 @@
     </div>
   </div>
 </section>
+
+<!-- Filter Offcanvas (mobile only) -->
+<section [ngClass]="'filter-offcanvas transition-3 ' + (filterOffcanvasOpen ? 'open' : '')">
+  <div class="filter-offcanvas__inner">
+    <div class="filter-offcanvas__close-row">
+      <a class="filter-offcanvas__close" (click)="filterOffcanvasOpen = false">
+        <i class="fal fa-times"></i>
+      </a>
+    </div>
+
+    <div class="filter-offcanvas__body">
+      <!-- Availability (expandable) -->
+      <div class="filter-offcanvas__row"
+        (click)="mobileActiveSection = mobileActiveSection === 'availability' ? null : 'availability'">
+        <span>Availability</span>
+        <i class="fas fa-arrow-right"></i>
+      </div>
+      <div class="filter-offcanvas__expand" *ngIf="mobileActiveSection === 'availability'">
+        <label class="filter-checkbox">
+          <input type="checkbox" [checked]="selectedAvailability.includes('in_stock')"
+            (change)="toggleAvailability('in_stock')" (click)="$event.stopPropagation()">
+          <span>In stock ({{ inStockCount }})</span>
+        </label>
+        <label class="filter-checkbox">
+          <input type="checkbox" [checked]="selectedAvailability.includes('out_of_stock')"
+            (change)="toggleAvailability('out_of_stock')" (click)="$event.stopPropagation()">
+          <span>Out of stock ({{ outOfStockCount }})</span>
+        </label>
+      </div>
+
+      <!-- Price (expandable) -->
+      <div class="filter-offcanvas__row"
+        (click)="mobileActiveSection = mobileActiveSection === 'price' ? null : 'price'">
+        <span>Price</span>
+        <i class="fas fa-arrow-right"></i>
+      </div>
+      <div class="filter-offcanvas__expand" *ngIf="mobileActiveSection === 'price'">
+        <p class="price-info">The highest price is Rs.{{ maxPrice | number:'1.2-2' }}</p>
+        <div class="price-inputs-mobile">
+          <div class="price-input-group-m">
+            <span>Rs</span>
+            <input type="number" placeholder="From" [(ngModel)]="priceFrom" (change)="applyPriceFilter()"
+              (click)="$event.stopPropagation()">
+          </div>
+          <div class="price-input-group-m">
+            <span>Rs</span>
+            <input type="number" placeholder="To" [(ngModel)]="priceTo" (change)="applyPriceFilter()"
+              (click)="$event.stopPropagation()">
+          </div>
+        </div>
+      </div>
+
+      <!-- Sort by (inline) -->
+      <div class="filter-offcanvas__sort-row">
+        <span>Sort by:</span>
+        <select [(ngModel)]="sortBy" (ngModelChange)="onSortingChange($event)">
+          <option value="asc">Alphabetically, A-Z</option>
+          <option value="sale">On Sale</option>
+          <option value="high">Price High To Low</option>
+          <option value="low">Price Low To High</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Bottom actions -->
+    <div class="filter-offcanvas__footer">
+      <a class="btn-remove-all" (click)="handleResetFilter(); filterOffcanvasOpen = false">Remove all</a>
+      <button class="btn-apply" (click)="filterOffcanvasOpen = false">Apply</button>
+    </div>
+  </div>
+</section>
+<div (click)="filterOffcanvasOpen = false"
+  [ngClass]="'filter-overlay transition-3 ' + (filterOffcanvasOpen ? 'opened' : '')"></div>
