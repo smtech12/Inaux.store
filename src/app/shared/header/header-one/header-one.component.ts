@@ -11,7 +11,7 @@ import { WebSectionItemDto } from '../../types/product-list-model';
   styleUrls: ['./header-one.component.scss']
 })
 export class HeaderOneComponent implements OnInit {
-  @Input() header_big = false;
+  @Input() header_big = true;
   @Input() white_bg = false;
   @Input() transparent = false;
 
