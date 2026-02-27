@@ -214,7 +214,12 @@ export class ProductDetailsUpperComponent implements OnInit, OnChanges, OnDestro
       }
     }
 
-    let message = `I need some information related to products.\n\nWaiting for your quick response.`;
+    let message = `Hi! I'm interested in this product: ${productTitle}\n`;
+    message += `SKU: ${sku}\n`;
+    if (attributesText) {
+      message += `Attributes: ${attributesText}\n`;
+    }
+    message += `\nProduct Link: ${productUrl}\n\nCould you please provide more information?`;
 
     const whatsappUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`;
 
