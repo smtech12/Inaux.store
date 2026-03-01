@@ -49,6 +49,7 @@ export class ProductDetailsUpperComponent implements OnInit, OnChanges, OnDestro
   public showSizeGuideModal: boolean = false;
   public sizeGuideItems: WebSectionItemDto[] = [];
   public sizeGuideLoading: boolean = false;
+  public showSizeGuideButton: boolean = false;
 
   constructor(
     public productService: ProductService,
@@ -66,6 +67,7 @@ export class ProductDetailsUpperComponent implements OnInit, OnChanges, OnDestro
     this.loadContactPhone();
     this.calculateDeliveryDates();
     this.initializeCountdownTimer();
+    this.checkSizeGuideActive();
   }
 
   ngOnDestroy() {
@@ -465,6 +467,20 @@ export class ProductDetailsUpperComponent implements OnInit, OnChanges, OnDestro
   /**
    * Open size guide modal with size guide data from API
    */
+  /**
+   * Check if the Size Guide section is active from API
+   */
+  private checkSizeGuideActive(): void {
+    this.productService.isSectionActive('Size Guide').subscribe({
+      next: (isActive) => {
+        this.showSizeGuideButton = isActive;
+      },
+      error: () => {
+        this.showSizeGuideButton = false;
+      }
+    });
+  }
+
   openSizeGuideModal(): void {
     this.showSizeGuideModal = true;
     this.sizeGuideLoading = true;

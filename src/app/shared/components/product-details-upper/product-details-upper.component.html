@@ -86,7 +86,7 @@
         </span>
       </div>
       <!-- Size Guide Button -->
-      <div class="product__size-guide mb-25">
+      <div *ngIf="showSizeGuideButton" class="product__size-guide mb-25">
         <button (click)="openSizeGuideModal()" class="size-guide-btn-main cursor-pointer">
           <i class="fas fa-ruler"></i>
           <span>Size Guide</span>

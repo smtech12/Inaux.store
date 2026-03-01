@@ -744,6 +744,23 @@ export class ProductService {
   }
 
   /**
+   * Check if a section is active by name
+   * @param sectionName The name of the section to check
+   * @returns Observable of boolean (true if section is active)
+   */
+  public isSectionActive(sectionName: string): Observable<boolean> {
+    return this.getAllSections().pipe(
+      map(sections => {
+        const targetName = (sectionName || '').trim().toLowerCase();
+        return sections.some(section => {
+          const name = (section.sectionName || '').trim().toLowerCase();
+          return name === targetName;
+        });
+      })
+    );
+  }
+
+  /**
    * Map Featured Product to IProduct interface
    * @param product Featured product from API (images can be array of objects or strings)
    * @returns IProduct object
