@@ -19,6 +19,24 @@ import { environment } from '../environments/environment';
 export function initializeApp(authService: AuthService): () => Promise<void> {
   return () => {
     return new Promise<void>((resolve) => {
+      // ✅ DEMO TOKEN: Check for demo token in URL (from Theme Preview "View Demo" button)
+      const urlParams = new URLSearchParams(window.location.search);
+      const demoToken = urlParams.get('token');
+
+      if (demoToken) {
+        console.log('[Demo Token] 🎯 Demo token found in URL, storing...');
+        // Clear ALL existing tokens so demo token takes priority
+        authService.clearAllTokens();
+        // Store the demo token as guest token
+        authService.setToken(demoToken);
+        // Clean the URL (remove ?token= from address bar)
+        const cleanUrl = window.location.origin + window.location.pathname;
+        window.history.replaceState({}, document.title, cleanUrl);
+        console.log('[Demo Token] ✅ Demo token stored successfully');
+        resolve();
+        return;
+      }
+
       // Check if token already exists in localStorage
       if (authService.hasToken()) {
         console.log('Token already exists in localStorage');
