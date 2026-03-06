@@ -22,14 +22,14 @@ export class CheckoutComponent implements OnInit {
   public isAuthenticated: boolean = false;
   public createdAccountInfo: { username: string; phone: string; password?: string; transactionNumber?: string } | null = null;
   public showAccountModal: boolean = false;
-  
+
   // Coupon related properties
   public couponApplied: boolean = false;
   public isApplyingCoupon: boolean = false;
   public couponMessage: string = '';
   public couponDiscount: number = 0;
   public appliedCouponCode: string = '';
-  
+
   // Delivery charge
   public deliveryCharge: number = 149;
 
@@ -148,27 +148,12 @@ export class CheckoutComponent implements OnInit {
     const year = now.getFullYear();
     const month = String(now.getMonth() + 1).padStart(2, '0');
     const date = String(now.getDate()).padStart(2, '0');
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+    const milliseconds = String(now.getMilliseconds()).padStart(3, '0');
 
-    // Get or initialize counter from localStorage for today
-    const todayKey = `${year}${month}${date}`;
-    const storedCounter = localStorage.getItem(
-      `transactionCounter_${todayKey}`,
-    );
-
-    if (storedCounter) {
-      this.transactionCounter = parseInt(storedCounter, 10) + 1;
-    } else {
-      this.transactionCounter = 1;
-    }
-
-    // Store updated counter
-    localStorage.setItem(
-      `transactionCounter_${todayKey}`,
-      this.transactionCounter.toString(),
-    );
-
-    const counter = String(this.transactionCounter).padStart(4, '0');
-    return `${year}${month}${date}${counter}`;
+    return `${year}${month}${date}${hours}${minutes}${seconds}${milliseconds}`;
   }
 
   onSubmit() {
@@ -391,7 +376,7 @@ export class CheckoutComponent implements OnInit {
     // Simulate coupon validation (in real app, this would call an API)
     setTimeout(() => {
       const upperCoupon = this.couponCode.toUpperCase().trim();
-      
+
       // Mock coupon validation - you can replace this with actual API call
       if (upperCoupon === 'SAVE10' || upperCoupon === 'WELCOME10') {
         this.couponDiscount = 10; // 10% discount
@@ -422,7 +407,7 @@ export class CheckoutComponent implements OnInit {
         this.couponMessage = 'Invalid coupon code';
         this.toastrService.error('Invalid coupon code');
       }
-      
+
       this.isApplyingCoupon = false;
     }, 1000);
   }
@@ -444,7 +429,7 @@ export class CheckoutComponent implements OnInit {
    */
   getTotalWithCoupon(): number {
     const cartTotal = this.cartService.totalPriceQuantity().total;
-    
+
     if (this.appliedCouponCode === 'FLAT50') {
       return Math.max(0, cartTotal - this.couponDiscount + this.deliveryCharge);
     } else {
@@ -457,7 +442,7 @@ export class CheckoutComponent implements OnInit {
    */
   getCouponDiscountAmount(): number {
     const cartTotal = this.cartService.totalPriceQuantity().total;
-    
+
     if (this.appliedCouponCode === 'FLAT50') {
       return this.couponDiscount;
     } else {
