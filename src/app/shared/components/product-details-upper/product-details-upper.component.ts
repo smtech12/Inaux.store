@@ -51,6 +51,15 @@ export class ProductDetailsUpperComponent implements OnInit, OnChanges, OnDestro
   public sizeGuideLoading: boolean = false;
   public showSizeGuideButton: boolean = false;
 
+  // Image zoom properties
+  public showImageZoomModal: boolean = false;
+  public zoomImageUrl: string = '';
+  public zoomStyle: { [key: string]: string } = {
+    'transform-origin': 'center',
+    'transform': 'scale(1)',
+    'transition': 'transform 0.3s ease'
+  };
+
   constructor(
     public productService: ProductService,
     public cartService: CartService,
@@ -505,6 +514,54 @@ export class ProductDetailsUpperComponent implements OnInit, OnChanges, OnDestro
    */
   closeSizeGuideModal(): void {
     this.showSizeGuideModal = false;
+  }
+
+  /**
+   * Open image zoom modal
+   */
+  openImageZoom(imageUrl: string | undefined): void {
+    // We keep the click-to-zoom as a fallback or secondary feature if needed, 
+    // but the hover zoom is the primary requested feature.
+    if (!imageUrl) return;
+    this.zoomImageUrl = imageUrl;
+    this.showImageZoomModal = true;
+    document.body.style.overflow = 'hidden';
+  }
+
+  /**
+   * Handle mouse move for magnifying effect
+   */
+  onMouseMove(event: MouseEvent): void {
+    const container = event.currentTarget as HTMLElement;
+    const rect = container.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width) * 100;
+    const y = ((event.clientY - rect.top) / rect.height) * 100;
+
+    this.zoomStyle = {
+      'transform-origin': `${x}% ${y}%`,
+      'transform': 'scale(2)',
+      'transition': 'none'
+    };
+  }
+
+  /**
+   * Handle mouse leave to reset zoom
+   */
+  onMouseLeave(): void {
+    this.zoomStyle = {
+      'transform-origin': 'center',
+      'transform': 'scale(1)',
+      'transition': 'transform 0.3s ease'
+    };
+  }
+
+  /**
+   * Close image zoom modal
+   */
+  closeImageZoom(): void {
+    this.showImageZoomModal = false;
+    // Restore scrolling
+    document.body.style.overflow = 'auto';
   }
 
   /**

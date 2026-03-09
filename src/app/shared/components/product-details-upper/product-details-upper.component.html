@@ -18,8 +18,12 @@
         </nav>
       </div>
       <div class="mb-20">
-        <div class="product__modal-img product__thumb w-img">
-          <img [src]="productService.activeImg" alt="product-img" />
+        <div class="product__modal-img product__thumb w-img overflow-hidden cursor-crosshair"
+          (mousemove)="onMouseMove($event)" (mouseleave)="onMouseLeave()">
+          <img [src]="productService.activeImg" alt="product-img" [ngStyle]="zoomStyle" />
+          <div class="product__img-zoom-btn">
+            <i class="fas fa-search-plus"></i>
+          </div>
           <div *ngIf="product.discount || product.new" class="product__sale">
             <span *ngIf="product.new || product.discount" class="new">new</span>
             <span *ngIf="product.discount" class="percent">-{{ product.discount }}%</span>
@@ -30,8 +34,12 @@
 
     <div *ngIf="style_2" class="product__modal-box">
       <div class="mb-20">
-        <div class="product__modal-img w-img">
-          <img [src]="productService.activeImg" alt="product-img" />
+        <div class="product__modal-img w-img overflow-hidden cursor-crosshair" (mousemove)="onMouseMove($event)"
+          (mouseleave)="onMouseLeave()">
+          <img [src]="productService.activeImg" alt="product-img" [ngStyle]="zoomStyle" />
+          <div class="product__img-zoom-btn">
+            <i class="fas fa-search-plus"></i>
+          </div>
         </div>
       </div>
       <nav>
@@ -294,6 +302,18 @@
           </ul>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- Image Zoom Modal -->
+<div *ngIf="showImageZoomModal" class="image-zoom-overlay" (click)="closeImageZoom()">
+  <div class="image-zoom-container" (click)="$event.stopPropagation()">
+    <button class="image-zoom-close" (click)="closeImageZoom()" title="Close">
+      <i class="fas fa-times"></i>
+    </button>
+    <div class="image-zoom-content">
+      <img [src]="zoomImageUrl" alt="Product Zoom" />
     </div>
   </div>
 </div>
