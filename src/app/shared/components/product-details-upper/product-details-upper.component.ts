@@ -320,6 +320,15 @@ export class ProductDetailsUpperComponent implements OnInit, OnChanges, OnDestro
       });
     }
 
+    // ✅ Fallback: For simple (non-variable) products, grab the default variant ID
+    // The API always returns a default variant even for simple products
+    if (variantId === undefined && this.variants && this.variants.length > 0) {
+      const defaultVariant = this.variants.find((v: any) => v.isDefault) || this.variants[0];
+      variantId = defaultVariant.variantId;
+      variantSku = variantSku || defaultVariant.sku;
+      variantPrice = variantPrice !== undefined ? variantPrice : defaultVariant.price;
+    }
+
     // Calculate unit price: variant price - (variant price * discount / 100)
     // Get discount from product (header level)
     const productDiscount = this.product.discount || 0;
@@ -1104,6 +1113,15 @@ export class ProductDetailsUpperComponent implements OnInit, OnChanges, OnDestro
       });
     }
 
+    // ✅ Fallback: For simple (non-variable) products, grab the default variant ID
+    // The API always returns a default variant even for simple products
+    if (variantId === undefined && this.variants && this.variants.length > 0) {
+      const defaultVariant = this.variants.find((v: any) => v.isDefault) || this.variants[0];
+      variantId = defaultVariant.variantId;
+      variantSku = variantSku || defaultVariant.sku;
+      variantPrice = variantPrice !== undefined ? variantPrice : defaultVariant.price;
+    }
+
     // Calculate unit price: variant price - (variant price * discount / 100)
     // Get discount from product (header level)
     const productDiscount = this.product.discount || 0;
@@ -1231,6 +1249,15 @@ export class ProductDetailsUpperComponent implements OnInit, OnChanges, OnDestro
           }
         }
       });
+    }
+
+    // ✅ Fallback: For simple (non-variable) products, grab the default variant ID
+    // The API always returns a default variant even for simple products
+    if (variantId === undefined && this.variants && this.variants.length > 0) {
+      const defaultVariant = this.variants.find((v: any) => v.isDefault) || this.variants[0];
+      variantId = defaultVariant.variantId;
+      variantSku = variantSku || defaultVariant.sku;
+      variantPrice = variantPrice !== undefined ? variantPrice : defaultVariant.price;
     }
 
     // Calculate price logic (same as cart)

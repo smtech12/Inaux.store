@@ -16,16 +16,10 @@ export class ProductSmItemComponent {
     public utilsService: UtilsService
   ) { }
 
-  // add to cart
+  // add to cart — always open modal to ensure variant ID is resolved
   addToCart(item: IProduct) {
-    // If product is variable, open modal for variant selection
-    if (item.isVariable) {
-      const modalId = `product-modal-${item.id}`;
-      this.utilsService.handleOpenModal(modalId, item);
-    } else {
-      // Directly add to cart for non-variable products
-      this.cartService.addCartProduct(item);
-    }
+    const modalId = `product-modal-${item.id}`;
+    this.utilsService.handleOpenModal(modalId, item);
   }
 
   // Function to check if an item is in the cart

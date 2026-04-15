@@ -19,18 +19,12 @@ export class WishlistComponent {
   ) { }
 
   /**
-   * Add product to cart - opens modal if variable, otherwise adds directly
+   * Add product to cart — always open modal to ensure variant ID is resolved
    */
   addToCart(item: IProduct) {
-    // If product is variable, open modal for variant selection
-    if (item.isVariable) {
-      const modalId = `product-modal-${item.id}`;
-      this.utilsService.handleOpenModal(modalId, item);
-      this.utilsService.modalMode = 'cart';
-    } else {
-      // Directly add to cart for non-variable products
-      this.cartService.addCartProduct(item);
-    }
+    const modalId = `product-modal-${item.id}`;
+    this.utilsService.handleOpenModal(modalId, item);
+    this.utilsService.modalMode = 'cart';
   }
 
   /**
